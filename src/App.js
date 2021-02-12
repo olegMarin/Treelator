@@ -55,7 +55,7 @@ class App extends React.Component {
           /> }
         { this.state.screen == 'Main' && 
           <Main 
-            states={this.state} 
+            {...this.state} 
             update={(s) => { this.axiUpdate(s) }}
           />}
         { this.state.screen == 'Print' && 
