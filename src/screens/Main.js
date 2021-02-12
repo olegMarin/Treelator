@@ -9,8 +9,8 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { RotateInUpLeft } from 'react-animations';
 
+import Zoom from 'react-reveal/Zoom';
 
 
 function Main(props) {
@@ -49,15 +49,12 @@ function Main(props) {
         >для компании</Button>
       </ButtonGroup>
 
-      <RotateInUpLeftDiv
-        className={classes.margin16}
-        style={!isForBusiness?{
-          height: 0,
-          overflow: "hidden"
-          }:{}}
-      >
+
+{isForBusiness&&
+      <Zoom bottom cascade>
+      <div className={classes.root}>
         <TextField
-            //className={classes.margin16}
+            className={classes.margin16}
             onChange={(e)=>handleSetSOffice(e.target.value)}
             value = {sOffice}
             type="number"
@@ -74,7 +71,7 @@ function Main(props) {
           />
           {/* <Typography gutterBottom></Typography> */}
           <Slider 
-            //className={classes.margin16}
+            className={classes.margin16}
             style={{marginTop: 0}}
             valueLabelDisplay="auto" 
             aria-label="pretto slider" 
@@ -84,8 +81,9 @@ function Main(props) {
             max={2000}
             />
           <div className={classes.margin} />
-        </RotateInUpLeftDiv>
-
+        </div>
+        </Zoom>}
+ 
 
     </Container>
   );
@@ -126,8 +124,4 @@ const Container = styled.div`
   overflow-x: hidden;
 `;
 
-const RotateInUpLeftAnimation = keyframes`${RotateInUpLeft}`;
-const RotateInUpLeftDiv = styled.div`
-  animation: infinite 3s ${RotateInUpLeftAnimation};
-`;
 export default Main;
