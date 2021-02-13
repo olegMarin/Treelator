@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade'
+import {lay} from '../constants/Layout'
 
 function Main(props) {
   const [isForMe, setForMe] = useState(0);
@@ -32,6 +33,10 @@ function Main(props) {
   return (
     <Container
     //className={classes.root}
+    style={{
+        
+      flexWrap: (lay.window.width>700) ? 'wrap':'nowrap',
+    }}
     >
       <Top
         address={props.address}
