@@ -10,6 +10,24 @@ import Header from "./components/Header";
 import "./style.css";
 import axi from "./functions/axiosf";
 
+import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#388e3c',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+  },
+});
+
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -47,6 +65,7 @@ class App extends React.Component {
   render(){
 
     return (
+      <ThemeProvider theme={theme}>
       <Container>
         { this.state.screen == 'Statistic' && 
           <Statistic {...this.state} 
@@ -69,6 +88,7 @@ class App extends React.Component {
           ></Header>  
         }    
       </Container>
+      </ThemeProvider>
     );
   }
 }
