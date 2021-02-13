@@ -9,6 +9,9 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
+import Brightness6Icon from '@material-ui/icons/Brightness6';
+import Fab from '@material-ui/core/Fab';
+
 function Top(props) {
 
  
@@ -23,6 +26,9 @@ function Top(props) {
           zIndex: 5,
           }}
       >
+        <Fab color="primary" aria-label="add">
+          <Brightness6Icon />
+        </Fab>
         <FormControl className={classes.margin}>
         <InputLabel id="demo-customized-select-label">адрес</InputLabel>
         <Select
@@ -40,6 +46,7 @@ function Top(props) {
           })}
         </Select>
       </FormControl>
+         {/*  <div style={{width: 80}}/> */}
       </div>
     );
   
@@ -85,5 +92,8 @@ const BootstrapInput = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
+    width:200,
+    marginLeft: 8,
+    marginRight: 60
   },
 }));
