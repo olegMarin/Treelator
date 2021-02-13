@@ -9,17 +9,23 @@ import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Divider from '@material-ui/core/Divider';
 
 import Zoom from 'react-reveal/Zoom';
-
+import Fade from 'react-reveal/Fade'
 
 function Main(props) {
-  const [isForMe, setForMe] = useState(1);
+  const [isForMe, setForMe] = useState(0);
   const [isForBusiness, setForBusiness] = useState(0);
 
   const [sOffice, setSOffice] = useState();
   const handleSetSOffice = (value) => {
     setSOffice(value === '' ? '' : Number(value));
+  };
+
+  const [peopleOffice, setPeopleOffice] = useState();
+  const handleSetPeopleOffice = (value) => {
+    setPeopleOffice(value === '' ? '' : Number(value));
   };
 
   const classes = useStyles();
@@ -50,7 +56,7 @@ function Main(props) {
       </ButtonGroup>
 
 
-{isForBusiness&&
+{isForBusiness?
       <Zoom bottom cascade>
       <div className={classes.root}>
         <TextField
@@ -80,9 +86,49 @@ function Main(props) {
             min={10}
             max={2000}
             />
-          <div className={classes.margin} />
+          <Divider 
+            className={classes.margin16}
+            style={{marginTop: 0}}/>
         </div>
-        </Zoom>}
+        </Zoom>
+        :<></>}
+
+
+      {(isForBusiness&&sOffice)?
+      <Fade bottom cascade>
+      <div className={classes.root}>
+        <TextField
+            className={classes.margin16}
+            onChange={(e)=>handleSetPeopleOffice(e.target.value)}
+            value = {peopleOffice}
+            type="number"
+            id="outlined-helperText"
+            label="Сколько людей там работает?"
+            defaultValue={typeof peopleOffice === 'number' ? peopleOffice : ''}
+            helperText="По нормам СанПиНа на одного работника должно приходиться не менее 4,5 м² офисного пространства, если сотрудник работает более 4 часов в день. "
+            variant="outlined"
+            focused={peopleOffice}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">{peopleOffice?"человек":""}</InputAdornment>,
+            }}
+          />
+          {/* <Typography gutterBottom></Typography> */}
+          <Slider 
+            className={classes.margin16}
+            style={{marginTop: 0}}
+            valueLabelDisplay="auto" 
+            aria-label="pretto slider" 
+            value={typeof peopleOffice === 'number' ? peopleOffice : 1}
+            onChange={(e, newValue)=>handleSetPeopleOffice(newValue)}
+            min={1}
+            max={200}
+            />
+          <Divider 
+              className={classes.margin16}
+              style={{marginTop: 0}}
+            />
+        </div>
+        </Fade>:<></>}
  
 
     </Container>
