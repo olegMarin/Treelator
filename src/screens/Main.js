@@ -69,8 +69,20 @@ function Main(props) {
     setPriceOffice(value === '' ? '' : Number(value));
   };
 
+  const [kvtCh, setKvtCh] = useState();
+  const handleSetKvtCh = (value) => {
+    setKvtCh(value === '' ? '' : Number(value));
+  };
 
+  const [paper, setPaper] = useState();
+  const handleSetPaper = (value) => {
+    setPaper(value === '' ? '' : Number(value));
+  };
 
+  const [water, setWater] = useState();
+  const handleSetWater = (value) => {
+    setWater(value === '' ? '' : Number(value));
+  };
 
   const classes = useStyles();
   return (
@@ -200,7 +212,7 @@ function Main(props) {
       {(isForBusiness&&sOffice&&peopleOffice)?
         <Rotate bottom right cascade>
         <div className={classes.root}>
-          <Typography gutterBottom>Чем угощаете сотрудников в офисе?</Typography>
+          <Typography className={classes.margin16} gutterBottom>Чем угощаете сотрудников в офисе?</Typography>
           <ButtonGroup 
             className={classes.margin16} 
             orientation="vertical"
@@ -230,6 +242,46 @@ function Main(props) {
         :<></>}
         {(isForBusiness&&sOffice&&peopleOffice)?
       <Rotate bottom left cascade>
+      <div className={classes.root}>
+      <Typography className={classes.margin16} gutterBottom>Какого класса бизнесс центр, в котором располагается офис?</Typography>
+          <ButtonGroup 
+            className={classes.margin16} 
+            size="large" color="primary" 
+            aria-label="large primary button group">
+            <Button 
+              className={classes.button}
+              variant={isA?"contained":"outlined"}
+              onClick={()=>{
+                  setA(1)
+                  setB(0)
+                  setC(0)
+                }}
+              >A</Button>
+            <Button
+              className={classes.button}
+              variant={isB?"contained":"outlined"}
+              onClick={()=>{
+                  setA(0)
+                  setB(1)
+                  setC(0)
+                }}
+            >B</Button>
+            <Button 
+              className={classes.button}
+              variant={isC?"contained":"outlined"}
+              onClick={()=>{
+                  setA(0)
+                  setB(0)
+                  setC(1)
+              }}
+              >C</Button>
+
+          </ButtonGroup>
+        </div>
+      </Rotate>:<></>}
+        {(isForBusiness&&sOffice&&peopleOffice&&
+        (isA||isB||isC))?
+      <Flip bottom cascade>
       <div className={classes.root}>
           <ButtonGroup 
             className={classes.margin16} 
@@ -316,10 +368,11 @@ function Main(props) {
             >в небольшом городе</Button>
           </ButtonGroup>
         </div>
-      </Rotate>:<></>}
+      </Flip>:<></>}
       {(isForBusiness&&sOffice&&peopleOffice&&
+      (isA||isB||isC)&&
       (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown))?
-      <Flip bottom cascade>
+      <Fade bottom cascade>
         <div className={classes.root}>
         <TextField
             className={classes.margin16}
@@ -352,8 +405,121 @@ function Main(props) {
               style={{marginTop: 0}}
             />
         </div>
-        </Flip>:<></>}
-      
+        </Fade>:<></>}
+      {(isForBusiness&&sOffice&&peopleOffice&&
+      (isA||isB||isC)&&
+      (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
+      priceOffice)?
+      <Fade bottom cascade>
+        <div className={classes.root}>
+        <TextField
+            className={classes.margin16}
+            onChange={(e)=>handleSetKvtCh(e.target.value)}
+            value = {kvtCh}
+            type="number"
+            id="outlined-helperText"
+            label="Какое электропотребление в месяц?"
+            defaultValue={typeof kvtCh === 'number' ? kvtCh : ''}
+            helperText="уточните расходы электроэнергии"
+            variant="outlined"
+            focused={kvtCh}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">{kvtCh?"квт/час в месяц":""}</InputAdornment>,
+            }}
+          />
+          {/* <Typography gutterBottom></Typography> */}
+          <Slider 
+            className={classes.margin16}
+            style={{marginTop: 0}}
+            valueLabelDisplay="auto" 
+            aria-label="pretto slider" 
+            value={typeof kvtCh === 'number' ? kvtCh : 200}
+            onChange={(e, newValue)=>handleSetKvtCh(newValue)}
+            min={200}
+            max={2000}
+            />
+          <Divider 
+              className={classes.margin16}
+              style={{marginTop: 0}}
+            />
+        </div>
+        </Fade>:<></>}
+              {(isForBusiness&&sOffice&&peopleOffice&&
+      (isA||isB||isC)&&
+      (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
+      priceOffice&&kvtCh)?
+      <Fade bottom cascade>
+        <div className={classes.root}>
+        <TextField
+            className={classes.margin16}
+            onChange={(e)=>handleSetPaper(e.target.value)}
+            value = {paper}
+            type="number"
+            id="outlined-helperText"
+            label="Какой расход бумаги в месяц?"
+            defaultValue={typeof paper === 'number' ? paper : ''}
+            helperText="уточните количество пачек бумаги, расходуемых в месяц"
+            variant="outlined"
+            focused={paper}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">{paper?"пачек в месяц":""}</InputAdornment>,
+            }}
+          />
+          {/* <Typography gutterBottom></Typography> */}
+          <Slider 
+            className={classes.margin16}
+            style={{marginTop: 0}}
+            valueLabelDisplay="auto" 
+            aria-label="pretto slider" 
+            value={typeof paper === 'number' ? paper : 1}
+            onChange={(e, newValue)=>handleSetPaper(newValue)}
+            min={1}
+            max={100}
+            />
+          <Divider 
+              className={classes.margin16}
+              style={{marginTop: 0}}
+            />
+        </div>
+        </Fade>:<></>}
+        {(isForBusiness&&sOffice&&peopleOffice&&
+      (isA||isB||isC)&&
+      (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
+      priceOffice&&kvtCh&&paper)?
+      <Fade bottom cascade>
+        <div className={classes.root}>
+        <TextField
+            className={classes.margin16}
+            onChange={(e)=>handleSetWater(e.target.value)}
+            value = {water}
+            type="number"
+            id="outlined-helperText"
+            label="Какой расход бумаги в месяц?"
+            defaultValue={typeof water === 'number' ? water : ''}
+            helperText="уточните количество пачек бумаги, расходуемых в месяц"
+            variant="outlined"
+            focused={water}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">{water?"пачек в месяц":""}</InputAdornment>,
+            }}
+          />
+          {/* <Typography gutterBottom></Typography> */}
+          <Slider 
+            className={classes.margin16}
+            style={{marginTop: 0}}
+            valueLabelDisplay="auto" 
+            aria-label="pretto slider" 
+            value={typeof water === 'number' ? water : 1}
+            onChange={(e, newValue)=>handleSetWater(newValue)}
+            min={1}
+            max={100}
+            />
+          <Divider 
+              className={classes.margin16}
+              style={{marginTop: 0}}
+            />
+        </div>
+        </Fade>:<></>}
  
       <div
         className='top'
