@@ -76,7 +76,7 @@ function Main(props) {
     setKvtCh(mathWorker*231)
     //считаем расход воды в кубаметрах
     setWater(mathWorker*74)
-    setDrink(Math.floor(mathWorker*1.25/12))
+    setDrink(Math.floor(mathWorker*1.25*21))
     //расход пачек бумаги
     setPaper(Math.floor(mathWorker*6.1))
   };
@@ -85,6 +85,21 @@ function Main(props) {
   const [isCookies, setCookies] = useState(0);
   const [isCoffee, setCoffee] = useState(0);
   const [isFruits, setFruits] = useState(0);
+
+  const [rateBiscuits, setRateBiscuits] = useState(0);
+  const calcBiscuits = () => {
+  let perBiscuits = peopleOffice * (isCookies * 3099 + isCoffee * 3628 + isFruits * 7180);
+    if (peopleOffice > 100) {
+      perBiscuits = perBiscuits * 0.85;
+    }; 
+    if (peopleOffice > 500) {
+      perBiscuits = perBiscuits * 0.75;
+    };
+    if (peopleOffice > 1000) {
+      perBiscuits = perBiscuits * 0.65;
+    };
+    setRateBiscuits(perBiscuits)                               
+  }
 
   const [isA, setA] = useState(0);
   const [isB, setB] = useState(0);
@@ -198,16 +213,17 @@ function Main(props) {
       <TopAnswer
         trees={
           (kvtCh * 0.004 * 0.45* 12)+
-          (water* 0.003 * 0.33 * 12)+
-          (drink*0.003 * 0.33*12)+  ///не понятна стоимость
-          (paper * 0.025 * 12)//и нужно ещё суда вкусняхи добавить
+          (water * 0.003 * 0.33 * 12)+
+          ((drink * 0.003 * 0.33 * 12) + (drink / 19 * 0.02 * 12))+  
+          (paper * 0.025 * 12)
           }
         sum={
           (sOffice*(priceOffice?priceOffice:0)*12)+
+          (rateBiscuits)+
           (kvtCh*rateElectricity*12)+
           (water*rateWater*12)+
-          (drink*9.3*12)+  ///не понятна стоимость
-          (paper*165.2*12)//и нужно ещё суда вкусняхи добавить
+          (drink*9.3*12)+  
+          (paper*165.2*12)
           }
       />
 
