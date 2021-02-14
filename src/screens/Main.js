@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import Top from "../components/Top"
+import TopAnswer from "../components/TopAnswer"
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
@@ -205,6 +206,12 @@ let perPaper = [0, 0];
         onChange={(f)=>{props.onChange(f)}}
         selected={props.selected}
       />
+      <TopAnswer
+        trees={}
+        sum={}
+      />
+
+{/* 
       <div
         className='top'
         style={{ 
@@ -221,7 +228,8 @@ let perPaper = [0, 0];
         <AccountBalanceWalletIcon style={{ color: 'green' }}/>
         <Typography style={{ margin: 4 }} gutterBottom>{sum + '  руб.'}</Typography>
       </div>
-    
+ */}    
+
       <Container
       //className={classes.root}
         style={{
