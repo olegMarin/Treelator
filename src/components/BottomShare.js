@@ -10,6 +10,16 @@ import Fade from 'react-reveal/Fade'
 import {lay} from '../constants/Layout'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import EntypoFacebookWithCircle from 'react-entypo-icons/lib/entypo/FacebookWithCircle'
+import EntypoTwitterWithCircle  from 'react-entypo-icons/lib/entypo/TwitterWithCircle.js'
+import EntypoPinterestWithCircle  from 'react-entypo-icons/lib/entypo/PinterestWithCircle.js'
+import EntypoLinkedinWithCircle  from 'react-entypo-icons/lib/entypo/LinkedinWithCircle.js'
+import Rotate from 'react-reveal/Rotate';
+
+let shareIcon = {
+    height: 40,
+    width: 40,
+    margin: 4
+  }
 
 function BottomShare(props) {
 
@@ -37,16 +47,42 @@ let text = 'Если переводу свою компанию на удалё�
           overflow: 'hidden'
           }}>
         {props.isForBusiness?
-          <Fade top cascade>
+          <Rotate bottom cascade>
           <div
             className='topStats'>
-<a target='_blank' href="https://www.facebook.com/sharer/sharer.php?u=https://treelator.businessmod.ru/">
-<EntypoFacebookWithCircle/>
-</a>
-
-
+              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://treelator.businessmod.ru/">
+              <EntypoFacebookWithCircle
+                style={{
+                  ...shareIcon
+                }}
+              />
+              </a>
+              <a target="_blank" href={"https://twitter.com/intent/tweet?url=https://treelator.businessmod.ru/&text="+text}>
+              <EntypoTwitterWithCircle
+                style={{
+                  ...shareIcon
+                }}
+              />
+              </a>
+              <a target="_blank"
+                href={"https://pinterest.com/pin/create/button/?url=https://treelator.businessmod.ru/&media=https://treelator.businessmod.ru/post.png&description="+text}>
+              <EntypoPinterestWithCircle
+                style={{
+                  ...shareIcon
+                }}
+              />
+              </a>
+              <a 
+              target="_blank"
+              href={"https://www.linkedin.com/shareArticle?mini=true&url=https://treelator.businessmod.ru/&title=&summary="+text}>
+              <EntypoLinkedinWithCircle
+                              style={{
+                                ...shareIcon
+                              }}
+                            />
+              </a>
           </div>
-          </Fade>
+          </Rotate>
           :
           <></>
         } 
@@ -67,4 +103,5 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 8,
     marginRight: 60
   },
+
 }));

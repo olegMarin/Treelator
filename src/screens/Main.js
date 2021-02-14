@@ -294,7 +294,7 @@ function Main(props) {
             id="outlined-helperText"
             label="Какую площадь занимает ваш офис?"
             defaultValue={typeof sOffice === 'number' ? sOffice : ''}
-            helperText="В башне Федерация Москва Сити можно арендовать офис стоимостью 158 тысяч рублей за м² в год — 11 м² на 33 этаже!"
+            helperText="занимательный факт: в башне Федерация Москва Сити можно арендовать офис стоимостью 158 тысяч рублей за м² в год — 11 м² на 33 этаже!"
             variant="outlined"
             autoFocus={true}
             focused={sOffice}
@@ -332,7 +332,7 @@ function Main(props) {
             id="outlined-helperText"
             label="Сколько людей там работает?"
             defaultValue={typeof peopleOffice === 'number' ? peopleOffice : ''}
-            helperText="По нормам СанПиНа на одного работника должно приходиться не менее 4,5 м² офисного пространства, если сотрудник работает более 4 часов в день. "
+            helperText="занимательный факт: по нормам СанПиНа на одного работника должно приходиться не менее 4,5 м² офисного пространства, если сотрудник работает более 4 часов в день. "
             variant="outlined"
             focused={peopleOffice}
             InputProps={{

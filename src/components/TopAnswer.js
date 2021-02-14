@@ -62,8 +62,8 @@ function TopAnswer(props) {
         <Fade top cascade>
           <div
             className='topStats'>
-            <EmojiPeopleIcon style={{ color: 'orange' }}/>
-            <DoubleArrowIcon style={{ color: 'orange' }}/>
+            <EmojiPeopleIcon style={{ color: '#000a' }}/>
+            <DoubleArrowIcon style={{ color: '#000a' }}/>
             <EntypoTree style={{ color: 'green' }}/>
             <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{ '  деревьев'}</Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>

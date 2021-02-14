@@ -50,6 +50,12 @@ a {
               width: 340px;
 }
 
+.shareIcon {
+  height: 40px;
+  width: 40px;
+  margin: 4px;
+}
+
 .animateNewField {
   transition: cubic-bezier(0.93, 0.27, 0, 3);
 
