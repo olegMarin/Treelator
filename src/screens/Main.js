@@ -119,8 +119,8 @@ function Main(props) {
     };
   }
 
-  const [rateElectricity, setRateElectricity] = useState(0);
-  const [rateWater, setRateWater] = useState(0);
+  const [rateElectricity, setRateElectricity] = useState(priceElectricity2);
+  const [rateWater, setRateWater] = useState(priceWater2);
 
   const [isMosscow1, setMosscow1] = useState(0);
   const [isMosscow2, setMosscow2] = useState(0);
@@ -203,7 +203,7 @@ function Main(props) {
           (paper * 0.025 * 12)//и нужно ещё суда вкусняхи добавить
           }
         sum={
-          (sOffice*priceOffice*12)+
+          (sOffice*(priceOffice?priceOffice:0)*12)+
           (kvtCh*rateElectricity*12)+
           (water*rateWater*12)+
           (drink*9.3*12)+  ///не понятна стоимость
@@ -211,24 +211,6 @@ function Main(props) {
           }
       />
 
-{/* 
-      <div
-        className='top'
-        style={{ 
-          position: "fixed",
-          //justifyContent: "space-around",
-          backgroundColor: "#efefefd6",
-          zIndex: 5,
-          top: 80,
-          height: 40,
-          }}
-      >
-        <LocalFloristIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{trees + '  деревьев'}</Typography>
-        <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4 }} gutterBottom>{sum + '  руб.'}</Typography>
-      </div>
- */}    
 
       <Container
       //className={classes.root}

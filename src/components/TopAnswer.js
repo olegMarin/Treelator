@@ -26,9 +26,9 @@ function TopAnswer(props) {
           }}
       >
         <LocalFloristIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{props.trees + '  деревьев'}</Typography>
+        <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{(props.trees?Math.floor(props.trees):'') + '  деревьев'}</Typography>
         <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4 }} gutterBottom>{props.sum + '  руб.'}</Typography>
+        <Typography style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
       </div>
     );
   
