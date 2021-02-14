@@ -77,9 +77,12 @@ class App extends React.Component {
             {...this.state} 
             update={(s) => { this.axiUpdate(s) }}
           />}
-        { this.state.screen == 'Print' && 
-          <Print {...this.state} route={(u) => this.route(u)} />}
-        {  this.state.screen != 'LogIn' && this.state.screen != 'Print' &&  
+        { 
+          this.state.screen == 'Print' && 
+          <Print {...this.state} route={(u) => this.route(u)} />
+          }
+        {  
+          this.state.screen != 'LogIn' &&   
        
           <Header
             {...this.state} 

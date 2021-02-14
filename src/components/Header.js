@@ -67,9 +67,14 @@ class Header extends React.Component {
         className='HeadButton'
         onMouseMove={() => { this.setState({ txtColorNews: '#ffcb17' }) }}
         onMouseLeave={() => { this.setState({ txtColorNews: '#d4e4d4' }) }}
-          onClick={() => { this.props.route('Fridges')}}
+          //onClick={() => { this.props.route('Print')}}
         >
-          <MenuHomeTxt style={{ color: this.state.txtColorNews }}>Статья</MenuHomeTxt>
+          <a
+              target="_blank"
+              href={"https://treelator.tilda.ws/"}
+             >
+            <MenuHomeTxt style={{ color: this.state.txtColorNews }}>Статья</MenuHomeTxt>
+          </a>
         
       </HeadButtonHome>
     </Container>

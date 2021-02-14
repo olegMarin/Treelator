@@ -13,7 +13,7 @@ class Print extends React.Component {
   render(){
     return (
       <iframe src="http://treelator.tilda.ws/" 
-      sandbox="allow-same-origin"
+      sandbox={"allow-same-origin"}
         width={lay.window.width} height={lay.window.height} align="left">
           Ваш браузер не поддерживает плавающие фреймы!
       </iframe>
