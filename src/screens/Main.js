@@ -239,9 +239,9 @@ function Main(props) {
           flexDirection: (lay.window.width>700) ? 'row':'column',
           alignItems: (lay.window.width>700) ? 'flex-start':'centre',
           justifyContent:'flex-start',
-          paddingTop: (isForMe&&isForBusiness) ? 170 : 130,
-          height: (isForMe&&isForBusiness) ? lay.window.height-170:lay.window.height-130,
-
+          paddingTop: (isForMe&&isForBusiness) ? 210 : 150,
+          height: (isForMe&&isForBusiness) ? lay.window.height-210:lay.window.height-150,
+          transition: '1s',
         }}
       >
 
@@ -522,7 +522,7 @@ calcRegion(4)
             id="outlined-helperText"
             label="Какая арендная ставка?"
             defaultValue={typeof priceOffice === 'number' ? priceOffice : ''}
-            helperText="Или выберете один из быстрых вариантов выше"
+            helperText="Или выберете один из быстрых вариантов"
             variant="outlined"
             focused={priceOffice}
             InputProps={{
