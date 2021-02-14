@@ -5,6 +5,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import Top from "../components/Top"
 import TopAnswer from "../components/TopAnswer"
+import BottomShare from "../components/BottomShare"
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
@@ -213,6 +214,29 @@ function Main(props) {
         selected={props.selected}
       />
       <TopAnswer
+        trees={
+          (kvtCh * 0.004 * 0.45* 12)+
+          (water * 0.003 * 0.33 * 12)+
+          ((drink * 0.003 * 0.33 * 12) + (drink / 19 * 0.02 * 12))+  
+          (paper * 0.025 * 12)
+          }
+        sum={
+          (sOffice*(priceOffice?priceOffice:0)*12)+
+          (rateBiscuits)+
+          (kvtCh*rateElectricity*12)+
+          (water*rateWater*12)+
+          (drink*9.3*12)+  
+          (paper*165.2*12)
+          }
+          isForMe={isForMe}
+          isForBusiness={isForBusiness}
+      />
+
+      <BottomShare
+        height={(isForBusiness&&sOffice&&peopleOffice&&
+          (isA||isB||isC)&&
+          (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown))
+          ?80:0}
         trees={
           (kvtCh * 0.004 * 0.45* 12)+
           (water * 0.003 * 0.33 * 12)+
