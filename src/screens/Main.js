@@ -75,20 +75,22 @@ function Main(props) {
     //считаем расход света в килловатах
     setKvtCh(mathWorker*231)
     //считаем расход воды в кубаметрах
-    setWater(mathWorker*74)
+    setWater(mathWorker*0.51)
     setDrink(Math.floor(mathWorker*1.25*21))
     //расход пачек бумаги
     setPaper(Math.floor(mathWorker*6.1))
+    //пересчитываем вкусняшки
+    calcBiscuits(isCookies,isCoffee,isFruits)
   };
 
 
-  const [isCookies, setCookies] = useState(0);
-  const [isCoffee, setCoffee] = useState(0);
-  const [isFruits, setFruits] = useState(0);
+  const [isCookies, setCookies] = useState(Number(0));
+  const [isCoffee, setCoffee] = useState(Number(0));
+  const [isFruits, setFruits] = useState(Number(0));
 
   const [rateBiscuits, setRateBiscuits] = useState(0);
-  const calcBiscuits = () => {
-  let perBiscuits = peopleOffice * (isCookies * 3099 + isCoffee * 3628 + isFruits * 7180);
+  const calcBiscuits = (isCook, isCoff, isFruit) => {
+  let perBiscuits = peopleOffice * (isCook * 3099 + isCoff * 3628 + isFruit * 7180);
     if (peopleOffice > 100) {
       perBiscuits = perBiscuits * 0.85;
     }; 
@@ -225,6 +227,8 @@ function Main(props) {
           (drink*9.3*12)+  
           (paper*165.2*12)
           }
+          isForMe={isForMe}
+          isForBusiness={isForBusiness}
       />
 
 
@@ -235,8 +239,8 @@ function Main(props) {
           flexDirection: (lay.window.width>700) ? 'row':'column',
           alignItems: (lay.window.width>700) ? 'flex-start':'centre',
           justifyContent:'flex-start',
-          paddingTop: 120,
-          height: lay.window.height-120,
+          paddingTop: (isForMe&&isForBusiness) ? 170 : 130,
+          height: (isForMe&&isForBusiness) ? lay.window.height-170:lay.window.height-130,
 
         }}
       >
@@ -340,17 +344,26 @@ function Main(props) {
             <Button 
               className={classes.button}
               variant={isCookies?"contained":"outlined"}
-              onClick={()=>setCookies(!isCookies)}
+              onClick={()=>{
+                  setCookies(Number(!isCookies))
+                  calcBiscuits(!isCookies,isCoffee,isFruits)
+                }}
               >печеньками</Button>
             <Button
               className={classes.button}
               variant={isCoffee?"contained":"outlined"}
-              onClick={()=>setCoffee(!isCoffee)}
+              onClick={()=>{
+                  setCoffee(Number(!isCoffee))
+                  calcBiscuits(isCookies,!isCoffee,isFruits)
+                }}
             >кофейком</Button>
             <Button
               className={classes.button}
               variant={isFruits?"contained":"outlined"}
-              onClick={()=>setFruits(!isFruits)}
+              onClick={()=>{
+                  setFruits(Number(!isFruits))
+                  calcBiscuits(isCookies,isCoffee,!isFruits)
+                }}
             >фруктиками</Button>
           </ButtonGroup>
           <Divider 
