@@ -3,35 +3,20 @@ import styled, { css } from "styled-components";
 import {themes} from "../constants/Colors"
 import moment from 'moment';
 import 'moment/locale/ru';
+import {lay} from '../constants/Layout'
 
 class Print extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      token: '123456789',
-    }
   }
 
   render(){
-    let baseTree = {}
-    this.props.base.productBase.map((item, index) => {
-      baseTree[item.idp] = item
-    })
     return (
-      <PrintForm
-        onClick={() => { this.props.route('NewGoods') }}
-      >
-        {this.props.sourceToPrint.map((item, index)=>{
-          return(
-              <div
-                key={index}
-                style={{ pageBreakAfter: "always", width: 116,}}
-                >
-                
-              </div>        
-            )}
-        )}
-      </PrintForm>
+      <iframe src="http://treelator.tilda.ws/" 
+      sandbox="allow-same-origin"
+        width={lay.window.width} height={lay.window.height} align="left">
+          Ваш браузер не поддерживает плавающие фреймы!
+      </iframe>
     );
   }
 }

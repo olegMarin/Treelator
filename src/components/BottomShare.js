@@ -41,7 +41,7 @@ let text = 'Если переводу свою компанию на удалё�
           justifyContent: 'flex-start'
           }}
       >
-        <Typography style={{ margin: 4}} gutterBottom>{'Поделитесь результатом в социальных сетях!'}</Typography>
+        <Typography style={{ margin: 4}} gutterBottom>{'Поделитесь в социальных сетях!'}</Typography>
         <div stile={{
           height:props.isForBusiness?40:0,
           overflow: 'hidden'

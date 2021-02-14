@@ -43,32 +43,33 @@ class Header extends React.Component {
           position: "fixed",
           zIndex: 200,
           width: this.props.menuOpenStatus,
-        }}>
-      <HeadButtonHome 
-        className='HeadButton'
-        onMouseMove ={() => { this.setState({ txtColorStats: '#ffcb17'})}} 
-        onMouseLeave ={() => { this.setState({ txtColorStats: '#d4e4d4' }) }} 
-          onClick={() => { this.props.route('Statistic')}}
-        >
-          <MenuHomeTxt style={{ color: this.state.txtColorStats}}> Статистика</MenuHomeTxt>
-        
-      </HeadButtonHome>
+        }}>      
       <HeadButtonHome
         className='HeadButton'
         onMouseMove={() => { this.setState({ txtColorHome: '#ffcb17' }) }}
         onMouseLeave={() => { this.setState({ txtColorHome: '#d4e4d4' }) }}
           onClick={() => { this.props.route('Main')}}
         >
-          <MenuHomeTxt style={{ color: this.state.txtColorHome }}>Опрос</MenuHomeTxt>
+          <MenuHomeTxt style={{ color: this.state.txtColorHome }}>Калькулятор</MenuHomeTxt>
        
       </HeadButtonHome>
+      <HeadButtonHome 
+        className='HeadButton'
+        onMouseMove ={() => { this.setState({ txtColorStats: '#ffcb17'})}} 
+        onMouseLeave ={() => { this.setState({ txtColorStats: '#d4e4d4' }) }} 
+          onClick={() => { this.props.route('Statistic')}}
+        >
+          <MenuHomeTxt style={{ color: this.state.txtColorStats}}> Ваши данные</MenuHomeTxt>
+        
+      </HeadButtonHome>
+
       <HeadButtonHome
         className='HeadButton'
         onMouseMove={() => { this.setState({ txtColorNews: '#ffcb17' }) }}
         onMouseLeave={() => { this.setState({ txtColorNews: '#d4e4d4' }) }}
           onClick={() => { this.props.route('Fridges')}}
         >
-          <MenuHomeTxt style={{ color: this.state.txtColorNews }}>Зачем всё это?</MenuHomeTxt>
+          <MenuHomeTxt style={{ color: this.state.txtColorNews }}>Статья</MenuHomeTxt>
         
       </HeadButtonHome>
     </Container>

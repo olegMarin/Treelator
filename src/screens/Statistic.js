@@ -25,7 +25,6 @@ class Statistic  extends React.Component {
       <div
         className='top'
       />
-    
       </List>
     </Rect>
   );}
