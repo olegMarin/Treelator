@@ -339,6 +339,7 @@ let perPaper = [0, 0];
                   setA(1)
                   setB(0)
                   setC(0)
+                  calcClass(coefA)
                 }}
               >A</Button>
             <Button
@@ -348,6 +349,7 @@ let perPaper = [0, 0];
                   setA(0)
                   setB(1)
                   setC(0)
+                  calcClass(1)
                 }}
             >B</Button>
             <Button 
@@ -357,6 +359,7 @@ let perPaper = [0, 0];
                   setA(0)
                   setB(0)
                   setC(1)
+                  calcClass(coefC)
               }}
               >C</Button>
 
