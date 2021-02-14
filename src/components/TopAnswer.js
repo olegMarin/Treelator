@@ -14,6 +14,7 @@ function TopAnswer(props) {
   const classes = useStyles();
 
     return (
+
       <div
         className='top'
         style={{ 
@@ -22,54 +23,51 @@ function TopAnswer(props) {
           backgroundColor: "#efefefd6",
           zIndex: 5,
           top: 80,
-          height: 40,
+          height:  (props.isForMe && props.isForBusiness) ? 100 : 60,
+          flexDirection: 'column'
           }}
       >
-        <LocalFloristIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{(props.trees?Math.floor(props.trees):'') + '  деревьев'}</Typography>
-        <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-        <Typography style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
+        <Typography style={{ margin: 4}} gutterBottom>{'Вы сэкономите в год:'}</Typography>
+        {props.isForMe?
+          <div
+          style={{ 
+            justifyContent: "space-around",
+            height: 40,
+            flexDirection: 'row',
+            }}>
+            <Typography style={{ margin: 4}} gutterBottom>{'компания:'}</Typography>
+            <LocalFloristIcon style={{ color: 'green' }}/>
+            <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{(props.trees?Math.floor(props.trees):'') + '  деревьев'}</Typography>
+            <AccountBalanceWalletIcon style={{ color: 'green' }}/>
+            <Typography style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
+          </div>
+          :
+          <></>
+        }        
+        {props.isForBusiness?
+          <div
+          style={{ 
+            justifyContent: "space-around",
+            height: 40,
+            flexDirection: 'row',
+            }}>
+            <Typography style={{ margin: 4}} gutterBottom>{'сотрудник:'}</Typography>
+            <LocalFloristIcon style={{ color: 'green' }}/>
+            <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{ '  деревьев'}</Typography>
+            <AccountBalanceWalletIcon style={{ color: 'green' }}/>
+            <Typography style={{ margin: 4 }} gutterBottom>{ ' тыс.  руб.'}</Typography>
+          </div>
+          :
+          <></>
+        }      
       </div>
+
     );
   
 }
 
 export default TopAnswer;
 
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    'label + &': {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-    },
-  },
-}))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
   margin: {
