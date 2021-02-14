@@ -31,6 +31,13 @@ const priceTown=7500
 const priceMosscow1=27500
 const pricePiter1=15500
 
+const priceElectricity1 = 7.41
+const priceElectricity2 = 6.57
+const priceElectricity3 = 5.96
+
+const priceWater1 = 42.3
+const priceWater2 = 32.53
+const priceWater3 = 30.45
 
 
 function Main(props) {
@@ -86,21 +93,33 @@ function Main(props) {
      //let squareClass = isA*2+isB+isC*0.7
     if (isMosscow2) {
       setPriceOffice(Math.floor(sClass*priceMosscow2/12));
+      setRateElectricity(priceElectricity1)
+      setRateWater(priceWater1)
     };
     if (isPiter2||isCity) {
       setPriceOffice(Math.floor(sClass*priceCity/12));
+      setRateElectricity(priceElectricity2)
+      setRateWater(priceWater2)
     };
     if (isTown) {
       setPriceOffice(Math.floor(sClass*priceTown/12));
+      setRateElectricity(priceElectricity3)
+      setRateWater(priceWater3)
     };
     if (isMosscow1) {
       setPriceOffice(Math.floor(sClass*priceMosscow1/12));//центр москвы
+      setRateElectricity(priceElectricity1)
+      setRateWater(priceWater1)
     };
     if (isPiter1) {
       setPriceOffice(Math.floor(sClass*pricePiter1/12));//центр питера
+      setRateElectricity(priceElectricity2)
+      setRateWater(priceWater2)
     };
   }
 
+  const [rateElectricity, setRateElectricity] = useState(0);
+  const [rateWater, setRateWater] = useState(0);
 
   const [isMosscow1, setMosscow1] = useState(0);
   const [isMosscow2, setMosscow2] = useState(0);
@@ -116,18 +135,28 @@ function Main(props) {
      let squareClass = isA*coefA+isB+isC*coefC
     if (Region == 1) {
       setPriceOffice(Math.floor(squareClass*priceMosscow2/12));
+      setRateElectricity(priceElectricity1)
+      setRateWater(priceWater1)
     };
     if (Region == 2) {
       setPriceOffice(Math.floor(squareClass*priceCity/12));
+      setRateElectricity(priceElectricity2)
+      setRateWater(priceWater2)
     };
     if (Region == 3) {
       setPriceOffice(Math.floor(squareClass*priceTown/12));
+      setRateElectricity(priceElectricity3)
+      setRateWater(priceWater3)
     };
     if (Region == 4) {
       setPriceOffice(Math.floor(squareClass*priceMosscow1/12));//центр москвы
+      setRateElectricity(priceElectricity1)
+      setRateWater(priceWater1)
     };
     if (Region == 5) {
       setPriceOffice(Math.floor(squareClass*pricePiter1/12));//центр питера
+      setRateElectricity(priceElectricity2)
+      setRateWater(priceWater2)
     };
   }
 

@@ -88,13 +88,13 @@ function calcBiscuits(Biscuits) { // должно получать [0, 0, 0]/[1,
 // перезаписывает perElectricity (экономия в деньгах на электричестве)
 function calcElectricity(Electricity) {
   if (Region == 1) {
-    perElectricity[0] = Electricity * 7.41 * 12;
+    perElectricity[0] = Electricity * 7.41 * 12;//
   };
   if (Region == 2) {
-    perElectricity[0] = Electricity * 6.57 * 12;
+    perElectricity[0] = Electricity * 6.57 * 12;//
   };
   if (Region == 3) {
-    perElectricity[0] = Electricity * 5.96 * 12;
+    perElectricity[0] = Electricity * 5.96 * 12;//
   };
   perElectricity[1] = Electricity * 0.004 * 0.45;
 }
@@ -107,18 +107,18 @@ function calcPaper(Paper) {
 
 function calcWater(Water) {
   if (Region == 1) {
-    perWater[0] = Water * 42.3 * 12;
+    perWater[0] = Water * 42.3 * 12;//
   };
   if (Region == 2) {
-    perWater[0] = Water * 32.53 * 12;
+    perWater[0] = Water * 32.53 * 12;//
   };
   if (Region == 3) {
-    perWater[0] = Water * 30.45 * 12;
+    perWater[0] = Water * 30.45 * 12;//
   };
   perWater[1] = Water * 0.003 * 0.33;
 }
 
-function calcCool(Cool) {
+function calcCool(Cool) {//
   if (Cool == 1) {
     if (Region == 1) {
       perSquare[0] = Square * 21923;
