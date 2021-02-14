@@ -22,6 +22,17 @@ import { Height } from "@material-ui/icons";
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
+const coefA = 1.4
+const coefC = 0.65
+
+const priceMosscow2=17500
+const priceCity=13000
+const priceTown=7500
+const priceMosscow1=27500
+const pricePiter1=15500
+
+
+
 function Main(props) {
 
   const [trees, setTrees] = useState(0);
@@ -40,12 +51,28 @@ function Main(props) {
   const [sOffice, setSOffice] = useState();
   const handleSetSOffice = (value) => {
     setSOffice(value === '' ? '' : Number(value));
+    let mathWorker = (value === '' ? 0 : Math.floor(Number(value)/4.5))
+    setPeopleOffice(mathWorker);
+    funcCostNature(mathWorker)
   };
 
   const [peopleOffice, setPeopleOffice] = useState();
   const handleSetPeopleOffice = (value) => {
-    setPeopleOffice(value === '' ? '' : Number(value));
+    let Worker = (value === '' ? 0 : Number(value))
+    setPeopleOffice(Worker);
+    funcCostNature(Worker)
   };
+
+  const funcCostNature = (mathWorker) => {
+    //считаем расход света в килловатах
+    setKvtCh(mathWorker*231)
+    //считаем расход воды в кубаметрах
+    setWater(mathWorker*74)
+    setDrink(Math.floor(mathWorker*1.25/12))
+    //расход пачек бумаги
+    setPaper(Math.floor(mathWorker*6.1))
+  };
+
 
   const [isCookies, setCookies] = useState(0);
   const [isCoffee, setCoffee] = useState(0);
@@ -55,6 +82,25 @@ function Main(props) {
   const [isB, setB] = useState(0);
   const [isC, setC] = useState(0);
 
+  const calcClass=(sClass) => {
+     //let squareClass = isA*2+isB+isC*0.7
+    if (isMosscow2) {
+      setPriceOffice(Math.floor(sClass*priceMosscow2/12));
+    };
+    if (isPiter2||isCity) {
+      setPriceOffice(Math.floor(sClass*priceCity/12));
+    };
+    if (isTown) {
+      setPriceOffice(Math.floor(sClass*priceTown/12));
+    };
+    if (isMosscow1) {
+      setPriceOffice(Math.floor(sClass*priceMosscow1/12));//центр москвы
+    };
+    if (isPiter1) {
+      setPriceOffice(Math.floor(sClass*pricePiter1/12));//центр питера
+    };
+  }
+
 
   const [isMosscow1, setMosscow1] = useState(0);
   const [isMosscow2, setMosscow2] = useState(0);
@@ -62,6 +108,28 @@ function Main(props) {
   const [isPiter2, setPiter2] = useState(0);
   const [isCity, setCity] = useState(0);
   const [isTown, setTown] = useState(0);
+
+  const [regionCoefficient, setRegionCoefficient] = useState(0);
+
+  const calcRegion=(Region) => {
+     // Либо 1 (дорогой регион), либо 2 (средний регион), либо 3 (дешёвый)
+     let squareClass = isA*coefA+isB+isC*coefC
+    if (Region == 1) {
+      setPriceOffice(Math.floor(squareClass*priceMosscow2/12));
+    };
+    if (Region == 2) {
+      setPriceOffice(Math.floor(squareClass*priceCity/12));
+    };
+    if (Region == 3) {
+      setPriceOffice(Math.floor(squareClass*priceTown/12));
+    };
+    if (Region == 4) {
+      setPriceOffice(Math.floor(squareClass*priceMosscow1/12));//центр москвы
+    };
+    if (Region == 5) {
+      setPriceOffice(Math.floor(squareClass*pricePiter1/12));//центр питера
+    };
+  }
 
 
   const [priceOffice, setPriceOffice] = useState();
@@ -83,6 +151,22 @@ function Main(props) {
   const handleSetWater = (value) => {
     setWater(value === '' ? '' : Number(value));
   };
+
+  const [drink, setDrink] = useState();
+  const handleSetDrink = (value) => {
+    setDrink(value === '' ? '' : Number(value));
+  };
+
+let perSquare = [0, 0];
+let perWoker = [0, 0];
+let perBiscuits = [0, 0];
+let perElectricity = [0, 0];
+let perWater = [0, 0];
+let perDrink = [0, 0];
+let perPaper = [0, 0];
+
+
+
 
   const classes = useStyles();
   return (
@@ -298,7 +382,7 @@ function Main(props) {
                   setPiter2(0)
                   setCity(0)
                   setTown(0)
-
+calcRegion(4)
                 }}
               >в центре Москвы</Button>
             <Button
@@ -312,6 +396,7 @@ function Main(props) {
                   setPiter2(0)
                   setCity(0)
                   setTown(0)
+                  calcRegion(1)
                 }}
             >на окраине Москвы</Button>
             <Button 
@@ -325,6 +410,7 @@ function Main(props) {
                   setPiter2(0)
                   setCity(0)
                   setTown(0)
+                  calcRegion(5)
               }}
               >в центре Питера</Button>
             <Button 
@@ -338,6 +424,7 @@ function Main(props) {
                   setPiter2(1)
                   setCity(0)
                   setTown(0)
+                  calcRegion(2)
                 }}
               >на окраине Питера</Button>
             <Button
@@ -351,6 +438,7 @@ function Main(props) {
                   setPiter2(0)
                   setCity(1)
                   setTown(0)
+                  calcRegion(2)
                 }}
             >в героде миллионнике</Button>
             <Button
@@ -364,6 +452,7 @@ function Main(props) {
                   setPiter2(0)
                   setCity(0)
                   setTown(1)
+                  calcRegion(3)
                 }}
             >в небольшом городе</Button>
           </ButtonGroup>
@@ -414,7 +503,7 @@ function Main(props) {
         <div className={classes.root}>
         <TextField
             className={classes.margin16}
-            onChange={(e)=>handleSetKvtCh(e.target.value)}
+            onChange={(e)=>handleSetKvtCh(e.target.value*12)}
             value = {kvtCh}
             type="number"
             id="outlined-helperText"
@@ -494,13 +583,13 @@ function Main(props) {
             value = {water}
             type="number"
             id="outlined-helperText"
-            label="Какой расход бумаги в месяц?"
+            label="Какой расход воды в месяц?"
             defaultValue={typeof water === 'number' ? water : ''}
-            helperText="уточните количество пачек бумаги, расходуемых в месяц"
+            helperText="уточните количество кубометров воды, расходуемых в месяц"
             variant="outlined"
             focused={water}
             InputProps={{
-              endAdornment: <InputAdornment position="end">{water?"пачек в месяц":""}</InputAdornment>,
+              endAdornment: <InputAdornment position="end">{water?"кубометров в месяц":""}</InputAdornment>,
             }}
           />
           {/* <Typography gutterBottom></Typography> */}

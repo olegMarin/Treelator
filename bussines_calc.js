@@ -27,17 +27,17 @@ function calcEconomy(Square) {
 // подставляем фиктивно в People
 function calcSquare(Square) {
   let people = Square / 4.5; 
-  perElectricity[0] = people * 231 * 12 * 6.57; 
-  perElectricity[1] = people * 231 * 12 * 0.004 * 0.45;  
-  perWater[0] = people * 74 * 32.53 * 12;
-  perWater[1] = people * 74 * 12 * 0.003 * 0.33;  
-  perDrink[0] = 9.3 * 1.25 * people;
-  perDrink[1] = people * 1.25 * 0.003 * 0.33;
-  perBiscuits[0] = people * (3099 + 3628);  
-  perPaper[0] = people * 6.1 * 12;  
-  perPaper[1] = people * 12 * 0.025;  
+  perElectricity[0] = people * 231 * 12 *    6.57;          // в реальности все переменные веду в месяце, перед выводом результата умножаю на 12
+  perElectricity[1] = people * 231 * 12 *    0.004 * 0.45;  //
+  perWater[0] = people * 74 * 12 *           32.53;         //
+  perWater[1] = people * 74 * 12 *            0.003 * 0.33;  //
+  perDrink[0] = people * 1.25 *             9.3;              //
+  perDrink[1] = people * 1.25 *             0.003 * 0.33;     //
+  perBiscuits[0] = people * (3099 + 3628);                    
+  perPaper[0] = people * 6.1 * 12;                            //  
+  perPaper[1] = people * 12 * 0.025;                          //
     
-  perSquare [0] = 16400 * Square;
+  perSquare [0] = 16400 * Square; //тут сразу год
   sumEconomy = perSquare [0] + perElectricity[0] + perWater[0] + perDrink[0] + perBiscuits[0] + perPaper[0];  
   sumEcology = perElectricity[1] + perWater[1] + perDrink[1] + perPaper[1]; 
 }
