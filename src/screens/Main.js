@@ -187,17 +187,6 @@ function Main(props) {
     setDrink(value === '' ? '' : Number(value));
   };
 
-let perSquare = [0, 0];
-let perWoker = [0, 0];
-let perBiscuits = [0, 0];
-let perElectricity = [0, 0];
-let perWater = [0, 0];
-let perDrink = [0, 0];
-let perPaper = [0, 0];
-
-
-
-
   const classes = useStyles();
   return (
     <>
@@ -207,8 +196,19 @@ let perPaper = [0, 0];
         selected={props.selected}
       />
       <TopAnswer
-        trees={}
-        sum={}
+        trees={
+          (kvtCh * 0.004 * 0.45* 12)+
+          (water* 0.003 * 0.33 * 12)+
+          (drink*0.003 * 0.33*12)+  ///не понятна стоимость
+          (paper * 0.025 * 12)//и нужно ещё суда вкусняхи добавить
+          }
+        sum={
+          (sOffice*priceOffice*12)+
+          (kvtCh*rateElectricity*12)+
+          (water*rateWater*12)+
+          (drink*9.3*12)+  ///не понятна стоимость
+          (paper*165.2*12)//и нужно ещё суда вкусняхи добавить
+          }
       />
 
 {/* 
