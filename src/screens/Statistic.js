@@ -25,6 +25,16 @@ class Statistic  extends React.Component {
       <div
         className='top'
       />
+
+
+
+
+      {/* <iframe src="https://treelator.businessmod.ru" 
+  sandbox="allow-same-origin allow-scripts"
+  width="360" height="600"
+  >
+
+</iframe> */}
       </List>
     </Rect>
   );}

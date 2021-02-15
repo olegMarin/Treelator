@@ -157,3 +157,10 @@ function calcCool(Cool) {//
 function calcRich(Rich) {
   perSquare[0] = Rich;
 }
+
+<iframe src="https://treelator.businessmod.ru" 
+  sandbox="allow-same-origin allow-scripts"
+  width="360" height="600"
+  >
+
+</iframe>
