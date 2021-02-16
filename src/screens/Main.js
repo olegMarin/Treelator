@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Top from "../components/Top"
 import TopAnswer from "../components/TopAnswer"
 import BottomShare from "../components/BottomShare"
+import InputForm from "../components/InputForm"
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
@@ -284,79 +285,43 @@ function Main(props) {
 
 
       {isForBusiness?
-      <Zoom bottom cascade>
-      <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetSOffice(e.target.value)}
-            value = {sOffice}
-            type="number"
-            id="outlined-helperText"
-            label="Какую площадь занимает ваш офис?"
+        <Zoom bottom cascade>
+          <InputForm
+            handleSet={(e)=>handleSetSOffice(e)}
+            value={sOffice}
+            label={"Какую площадь занимает ваш офис?"}
             defaultValue={typeof sOffice === 'number' ? sOffice : ''}
-            helperText="занимательный факт: в башне Федерация Москва Сити можно арендовать офис стоимостью 158 тысяч рублей за м² в год — 11 м² на 33 этаже!"
-            variant="outlined"
+            helperText="занимательный факт: в башне Федерация Москва Сити можно арендовать офис стоимостью 158 тысяч рублей за м² в год — 11 м² на 33 этаже!"           
             autoFocus={true}
             focused={sOffice}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{sOffice?"квадратных метров":""}</InputAdornment>,
-            }}
-          />
-          
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof sOffice === 'number' ? sOffice : 10}
-            onChange={(e, newValue)=>handleSetSOffice(newValue)}
+            endAdornment={"квадратных метров"}
+            sliderValue = {typeof sOffice === 'number' ? sOffice : 10}
             min={10}
             max={2000}
-            />
-          <Divider 
-            className={classes.margin16}
-            style={{marginTop: 0}}/>
-        </div>
+          />
         </Zoom>
         :<></>}
 
 
       {(isForBusiness&&sOffice)?
       <Fade bottom cascade>
-      <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetPeopleOffice(e.target.value)}
-            value = {peopleOffice}
-            type="number"
-            id="outlined-helperText"
-            label="Сколько людей там работает?"
+      <InputForm
+            handleSet={(e)=>handleSetPeopleOffice(e)}
+            value={peopleOffice}
+            label={"Сколько людей там работает?"}
             defaultValue={typeof peopleOffice === 'number' ? peopleOffice : ''}
             helperText="занимательный факт: по нормам СанПиНа на одного работника должно приходиться не менее 4,5 м² офисного пространства, если сотрудник работает более 4 часов в день. "
-            variant="outlined"
+            autoFocus={true}
             focused={peopleOffice}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{peopleOffice?"человек":""}</InputAdornment>,
-            }}
-          />
-          {/* <Typography gutterBottom></Typography> */}
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof peopleOffice === 'number' ? peopleOffice : 1}
-            onChange={(e, newValue)=>handleSetPeopleOffice(newValue)}
+            endAdornment={"человек"}
+            sliderValue = {typeof peopleOffice === 'number' ? peopleOffice : 1}
             min={1}
             max={200}
-            />
-          <Divider 
-              className={classes.margin16}
-              style={{marginTop: 0}}
-            />
-        </div>
+          />
         </Fade>:<></>}
+        
       {(isForBusiness&&sOffice&&peopleOffice)?
+        //кофе печеньки
         <Rotate bottom right cascade>
         <div className={classes.root}>
           <Typography className={classes.margin16} gutterBottom>Чем угощаете сотрудников в офисе?</Typography>
@@ -397,6 +362,7 @@ function Main(props) {
         </Rotate>
         :<></>}
         {(isForBusiness&&sOffice&&peopleOffice)?
+        //класс БЦ
       <Rotate bottom left cascade>
       <div className={classes.root}>
       <Typography className={classes.margin16} gutterBottom>Какого класса бизнесс центр, в котором располагается офис?</Typography>
@@ -440,6 +406,7 @@ function Main(props) {
       </Rotate>:<></>}
         {(isForBusiness&&sOffice&&peopleOffice&&
         (isA||isB||isC))?
+        //какой город
       <Flip bottom cascade>
       <div className={classes.root}>
           <ButtonGroup 
@@ -536,153 +503,82 @@ calcRegion(4)
       {(isForBusiness&&sOffice&&peopleOffice&&
       (isA||isB||isC)&&
       (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown))?
-      <Fade bottom cascade>
-        <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetPriceOffice(e.target.value)}
-            value = {priceOffice}
-            type="number"
-            id="outlined-helperText"
-            label="Какая арендная ставка?"
+      //Какая арендная ставка?
+        <Fade bottom cascade>
+          <InputForm
+            handleSet={(e)=>handleSetPriceOffice(e)}
+            value={priceOffice}
+            label={"Какая арендная ставка?"}
             defaultValue={typeof priceOffice === 'number' ? priceOffice : ''}
-            helperText="Или выберете один из быстрых вариантов"
-            variant="outlined"
+            helperText="Или выберете один из быстрых вариантов. "
+            autoFocus={true}
             focused={priceOffice}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{priceOffice?"рублей за кв. м.":""}</InputAdornment>,
-            }}
-          />
-          {/* <Typography gutterBottom></Typography> */}
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof priceOffice === 'number' ? priceOffice : 200}
-            onChange={(e, newValue)=>handleSetPriceOffice(newValue)}
+            endAdornment={"рублей за кв. м."}
+            sliderValue = {typeof priceOffice === 'number' ? priceOffice : 200}
             min={200}
             max={2000}
-            />
-          <Divider 
-              className={classes.margin16}
-              style={{marginTop: 0}}
-            />
-        </div>
+          />
         </Fade>:<></>}
       {(isForBusiness&&sOffice&&peopleOffice&&
       (isA||isB||isC)&&
       (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
       priceOffice)?
+      //Какое электропотребление в месяц?
       <Fade bottom cascade>
-        <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetKvtCh(e.target.value*12)}
-            value = {kvtCh}
-            type="number"
-            id="outlined-helperText"
-            label="Какое электропотребление в месяц?"
+          <InputForm
+            handleSet={(e)=>handleSetKvtCh(e)}
+            value={kvtCh}
+            label={"Какое электропотребление в месяц?"}
             defaultValue={typeof kvtCh === 'number' ? kvtCh : ''}
-            helperText="уточните расходы электроэнергии"
-            variant="outlined"
-            focused={kvtCh}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{kvtCh?"квт/час в месяц":""}</InputAdornment>,
-            }}
-          />
-          {/* <Typography gutterBottom></Typography> */}
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof kvtCh === 'number' ? kvtCh : 200}
-            onChange={(e, newValue)=>handleSetKvtCh(newValue)}
+            helperText="уточните расходы электроэнергии. "
+            autoFocus={false}
+            focused={false}
+            endAdornment={"квт/час в месяц"}
+            sliderValue = {typeof kvtCh === 'number' ? kvtCh : 200}
             min={200}
             max={2000}
-            />
-          <Divider 
-              className={classes.margin16}
-              style={{marginTop: 0}}
-            />
-        </div>
+          />
         </Fade>:<></>}
               {(isForBusiness&&sOffice&&peopleOffice&&
       (isA||isB||isC)&&
       (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
       priceOffice&&kvtCh)?
+      //Какой расход бумаги в месяц?
       <Fade bottom cascade>
-        <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetPaper(e.target.value)}
-            value = {paper}
-            type="number"
-            id="outlined-helperText"
-            label="Какой расход бумаги в месяц?"
+          <InputForm
+            handleSet={(e)=>handleSetPaper(e)}
+            value={paper}
+            label={"Какой расход бумаги в месяц?"}
             defaultValue={typeof paper === 'number' ? paper : ''}
-            helperText="уточните количество пачек бумаги, расходуемых в месяц"
-            variant="outlined"
-            focused={paper}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{paper?"пачек в месяц":""}</InputAdornment>,
-            }}
-          />
-          {/* <Typography gutterBottom></Typography> */}
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof paper === 'number' ? paper : 1}
-            onChange={(e, newValue)=>handleSetPaper(newValue)}
+            helperText="уточните количество пачек бумаги, расходуемых в месяц. "
+            autoFocus={false}
+            focused={false}
+            endAdornment={"пачек в месяц"}
+            sliderValue = {typeof paper === 'number' ? paper : 1}
             min={1}
             max={100}
-            />
-          <Divider 
-              className={classes.margin16}
-              style={{marginTop: 0}}
-            />
-        </div>
+          />
         </Fade>:<></>}
         {(isForBusiness&&sOffice&&peopleOffice&&
       (isA||isB||isC)&&
       (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown)&&
       priceOffice&&kvtCh&&paper)?
+      //Какой расход воды в месяц?
       <Fade bottom cascade>
-        <div className={classes.root}>
-        <TextField
-            className={classes.margin16}
-            onChange={(e)=>handleSetWater(e.target.value)}
-            value = {water}
-            type="number"
-            id="outlined-helperText"
-            label="Какой расход воды в месяц?"
+        <InputForm
+            handleSet={(e)=>handleSetWater(e)}
+            value={water}
+            label={"Какой расход воды в месяц?"}
             defaultValue={typeof water === 'number' ? water : ''}
-            helperText="уточните количество кубометров воды, расходуемых в месяц"
-            variant="outlined"
-            focused={water}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">{water?"кубометров в месяц":""}</InputAdornment>,
-            }}
-          />
-          {/* <Typography gutterBottom></Typography> */}
-          <Slider 
-            className={classes.margin16}
-            style={{marginTop: 0}}
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            value={typeof water === 'number' ? water : 1}
-            onChange={(e, newValue)=>handleSetWater(newValue)}
+            helperText="уточните количество кубометров воды, расходуемых в месяц. "
+            autoFocus={false}
+            focused={false}
+            endAdornment={"кубометров в месяц"}
+            sliderValue = {typeof water === 'number' ? water : 1}
             min={1}
             max={100}
-            />
-          <Divider 
-              className={classes.margin16}
-              style={{marginTop: 0}}
-            />
-        </div>
+          />
+
         </Fade>:<></>}
  
       <div
