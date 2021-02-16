@@ -23,7 +23,7 @@ function TopAnswer(props) {
         style={{ 
           position: "fixed",
           //justifyContent: "space-around",
-          backgroundColor: "#efefefd6",
+          backgroundColor: "#efefef99",
           zIndex: 5,
           top: 80,
           height:  (props.isForMe && props.isForBusiness) ? 110 : 70,

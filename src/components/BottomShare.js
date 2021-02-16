@@ -18,7 +18,8 @@ import Rotate from 'react-reveal/Rotate';
 let shareIcon = {
     height: 40,
     width: 40,
-    margin: 4
+    margin: 4,
+    color: '#99CC33'
   }
 
 function BottomShare(props) {
@@ -33,7 +34,7 @@ let text = 'Если переводу свою компанию на удалё�
         style={{ 
           position: "fixed",
           //justifyContent: "space-around",
-          backgroundColor: "#efefefd6",
+          backgroundColor: "#efefef99",
           zIndex: 5,
           bottom: 0,
           height:  props.height,

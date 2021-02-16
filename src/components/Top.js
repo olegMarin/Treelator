@@ -22,7 +22,7 @@ function Top(props) {
         className='top'
         style={{ 
           position: "fixed",
-          backgroundColor: "#efefefd6",
+          backgroundColor: "#efefef99",
           zIndex: 5,
           }}
       >

@@ -515,7 +515,7 @@ calcRegion(4)
                   setTown(0)
                   calcRegion(2)
                 }}
-            >в героде миллионнике</Button>
+            >в городе миллионнике</Button>
             <Button
               className={classes.button}
               variant={isTown?"contained":"outlined"}
@@ -723,7 +723,8 @@ const useStyles = makeStyles((theme) => ({
 const Container = styled.div`
   display: flex;
   flex: 0 1 auto;
-  background-color: #E6E6E6;
+  ${'' /* background-color: #E6E6E6; */}
+  background-color: #fff;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
