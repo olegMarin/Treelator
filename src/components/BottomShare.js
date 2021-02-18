@@ -30,11 +30,10 @@ let text = 'Если переводу свою компанию на удалё�
     return (
 
       <div
-        className='bottom'
+        className={'bottom '+ classes.backgroundColor}
         style={{ 
           position: "fixed",
           //justifyContent: "space-around",
-          backgroundColor: "#efefef99",
           zIndex: 5,
           bottom: 0,
           height:  props.height,
@@ -42,7 +41,7 @@ let text = 'Если переводу свою компанию на удалё�
           justifyContent: 'flex-start'
           }}
       >
-        <Typography style={{ margin: 4}} gutterBottom>{'Поделитесь в социальных сетях!'}</Typography>
+        <Typography className={classes.color} style={{ margin: 4}} gutterBottom>{'Поделитесь в социальных сетях!'}</Typography>
         <div stile={{
           height:props.isForBusiness?40:0,
           overflow: 'hidden'
@@ -104,5 +103,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 8,
     marginRight: 60
   },
-
+  color: {
+    color: theme.palette.text.primary+"a",
+    transition: '1s'
+  },
+  backgroundColor: {
+    backgroundColor: theme.palette.backgroundColorTransparent,
+    transition: '1s'
+  }
 }));

@@ -20,6 +20,7 @@ class Statistic  extends React.Component {
         address={this.props.address}
         onChange={(f)=>{this.props.onChange(f)}}
         selected={this.props.selected}
+        toggleTheme={()=>this.props.toggleTheme()}
       />
       <List>
       <div

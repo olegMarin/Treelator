@@ -19,20 +19,20 @@ function TopAnswer(props) {
     return (
 
       <div
-        className='top'
+        className={'top '+ classes.backgroundColor}
         style={{ 
           position: "fixed",
           //justifyContent: "space-around",
-          backgroundColor: "#efefef99",
+          //backgroundColor: "#efefef99",
           zIndex: 5,
           top: 80,
           height:  (props.isForMe && props.isForBusiness) ? 110 : 70,
           transition: '1s',
           flexDirection: 'column',
-          justifyContent: 'flex-start'
+          justifyContent: 'flex-start',
           }}
       >
-        <Typography style={{ margin: 4}} gutterBottom>{'Вы сэкономите в год:'}</Typography>
+        <Typography className={classes.color} style={{ margin: 4}} gutterBottom>{'Вы сэкономите в год:'}</Typography>
         <div stile={{
           height:props.isForBusiness?40:0,
           overflow: 'hidden'
@@ -41,14 +41,14 @@ function TopAnswer(props) {
           <Fade top cascade>
           <div
             className='topStats'>
-            <BusinessIcon style={{ color: '#000a' }}/>
-            <DoubleArrowIcon style={{ color: '#000a' }}/>
+            <BusinessIcon className={classes.color}/>
+            <DoubleArrowIcon className={classes.color}/>
             <EntypoTree style={{ color: 'green' }}/>
-            <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>
+            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>
               {(props.trees?Math.floor(props.trees):'') + '  деревьев'}
               </Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-            <Typography style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
           </div>
           </Fade>
           :
@@ -62,12 +62,12 @@ function TopAnswer(props) {
         <Fade top cascade>
           <div
             className='topStats'>
-            <EmojiPeopleIcon style={{ color: '#000a' }}/>
-            <DoubleArrowIcon style={{ color: '#000a' }}/>
+            <EmojiPeopleIcon className={classes.color}/>
+            <DoubleArrowIcon className={classes.color }/>
             <EntypoTree style={{ color: 'green' }}/>
-            <Typography style={{ margin: 4, marginRight: 16 }} gutterBottom>{ '  деревьев'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>{ '  деревьев'}</Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-            <Typography style={{ margin: 4 }} gutterBottom>{ ' тыс.  руб.'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{ ' тыс.  руб.'}</Typography>
           </div>
           </Fade>
           :
@@ -88,6 +88,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     width:200,
     marginLeft: 8,
-    marginRight: 60
+    marginRight: 60,
+    color: theme.palette.text.primary
+  },  
+  color: {
+    color: theme.palette.text.primary+"d",
+    transition: '1s'
   },
+  backgroundColor: {
+    backgroundColor: theme.palette.backgroundColorTransparent,
+    transition: '1s'
+  }
 }));

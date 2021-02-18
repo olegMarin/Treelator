@@ -214,6 +214,7 @@ function Main(props) {
         address={props.address}
         onChange={(f)=>{props.onChange(f)}}
         selected={props.selected}
+        toggleTheme={()=>props.toggleTheme()}
       />
       <TopAnswer
         trees={
@@ -268,6 +269,8 @@ function Main(props) {
           paddingTop: (isForMe&&isForBusiness) ? 210 : 150,
           height: (isForMe&&isForBusiness) ? lay.window.height-210:lay.window.height-150,
           transition: '1s',
+          
+          backgroundColor: (props.theme=='light')?"#fff":"#000",
         }}
       >
       <div
@@ -334,7 +337,7 @@ function Main(props) {
         //кофе печеньки
         <Rotate bottom right cascade>
         <div className={classes.root}>
-          <Typography className={classes.margin16} gutterBottom>Чем угощаете сотрудников в офисе?</Typography>
+          <Typography  className={classes.margin16} gutterBottom>Чем угощаете сотрудников в офисе?</Typography>
           <ButtonGroup 
             className={classes.margin16} 
             orientation="vertical"
@@ -618,7 +621,8 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2),
       marginBottom: theme.spacing(1),
       width: 300,
-      transition: '1s'
+      transition: '1s',
+      color: theme.palette.text.primary
   },
   button: {
    transition: '1s'
@@ -630,7 +634,6 @@ const Container = styled.div`
   display: flex;
   flex: 0 1 auto;
   ${'' /* background-color: #E6E6E6; */}
-  background-color: #fff;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;

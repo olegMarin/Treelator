@@ -19,14 +19,17 @@ function Top(props) {
 
     return (
       <div
-        className='top'
+        className={'top '+ classes.backgroundColor}
         style={{ 
           position: "fixed",
-          backgroundColor: "#efefef99",
           zIndex: 5,
           }}
       >
-        <Fab color="primary" aria-label="add">
+        <Fab 
+          color="primary" 
+          aria-label="add"
+          onClick={()=>props.toggleTheme()}
+          >
           <Brightness6Icon />
         </Fab>
         <FormControl className={classes.margin}>
@@ -95,5 +98,13 @@ const useStyles = makeStyles((theme) => ({
     width:200,
     marginLeft: 8,
     marginRight: 60
+  },  
+  color: {
+    color: theme.palette.text.primary+"a",
+    transition: '1s'
   },
+  backgroundColor: {
+    backgroundColor: theme.palette.backgroundColorTransparent,
+    transition: '1s'
+  }
 }));

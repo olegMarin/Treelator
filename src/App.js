@@ -12,21 +12,45 @@ import axi from "./functions/axiosf";
 
 import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const light = createMuiTheme({
   palette: {
+    type: 'light',
     primary: {
       main: '#7aa329',
       contrastText: '#fff',
+      text: '#000'
     },
     secondary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
+      main: '#002884',
       contrastText: '#fff',
+      text: '#000'
     },
+    text: {
+      primary: "#010",
+    },
+    backgroundColorTransparent:"#efefef99",
   },
 });
 
+
+const dark = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#99CC33',
+      contrastText: '#000',
+      text: '#aaa'
+    },
+    secondary: {
+      main: '#757ce8',
+      contrastText: '#000',
+    },
+    text: {
+      primary: "#beb",
+    },
+    backgroundColorTransparent:"#222e",
+  },
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +65,9 @@ class App extends React.Component {
       address: [],
       sourceToPrint: [], 
       selected: {},
+      theme: 'light'
     }
+
   }
 
   componentDidMount(){
@@ -61,21 +87,26 @@ class App extends React.Component {
     this.axiUpdate(s)
   }
 
+  toggleTheme=()=>{
+    this.setState({theme: (this.state.theme=='light')?'dark':'light'})
+  }
 
   render(){
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={(this.state.theme=='light')?light:dark}>
       <Container>
         { this.state.screen == 'Statistic' && 
           <Statistic {...this.state} 
             update={(s) => { this.axiUpdate(s) }}
             onChangeFridge={(f)=>{this.setState({selectedFridge: f})}}
+            toggleTheme={()=>this.toggleTheme()}
           /> }
         { this.state.screen == 'Main' && 
           <Main 
             {...this.state} 
             update={(s) => { this.axiUpdate(s) }}
+            toggleTheme={()=>this.toggleTheme()}
           />}
         { 
           this.state.screen == 'Print' && 
