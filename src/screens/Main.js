@@ -19,6 +19,7 @@ import Fade from 'react-reveal/Fade'
 import Rotate from 'react-reveal/Rotate';
 import Flip from 'react-reveal/Flip';
 
+import Logo from '../assets/logo'
 import {lay} from '../constants/Layout'
 import { Height } from "@material-ui/icons";
 
@@ -68,7 +69,7 @@ function Main(props) {
 
   const [peopleOffice, setPeopleOffice] = useState();
   const handleSetPeopleOffice = (value) => {
-    let Worker = (value === '' ? 0 : Number(value))
+    let Worker = (value === '' ? '' : Number(value))
     setPeopleOffice(Worker);
     funcCostNature(Worker)
   };
@@ -269,20 +270,29 @@ function Main(props) {
           transition: '1s',
         }}
       >
-
-      <ButtonGroup className={classes.margin16} size="large" color="primary" aria-label="large primary button group">
-        <Button 
-          className={classes.button}
-          variant={isForMe?"contained":"outlined"}
-          onClick={()=>setForMe(!isForMe)}
-          >для меня</Button>
-        <Button
-          className={classes.button}
-          variant={isForBusiness?"contained":"outlined"}
-          onClick={()=>setForBusiness(!isForBusiness)}
-        >для компании</Button>
-      </ButtonGroup>
-
+      <div
+        className="divColumn"
+      >
+        <Logo
+        className={classes.margin16}
+          style={{
+            width: 150,
+            height: 'auto'
+          }}
+        />
+        <ButtonGroup className={classes.margin16} size="large" color="primary" aria-label="large primary button group">
+          <Button 
+            className={classes.button}
+            variant={isForMe?"contained":"outlined"}
+            onClick={()=>setForMe(!isForMe)}
+            >для меня</Button>
+          <Button
+            className={classes.button}
+            variant={isForBusiness?"contained":"outlined"}
+            onClick={()=>setForBusiness(!isForBusiness)}
+          >для компании</Button>
+        </ButtonGroup>
+      </div>
 
       {isForBusiness?
         <Zoom bottom cascade>
@@ -631,5 +641,6 @@ const Container = styled.div`
   overflow-x: hidden;
   transition: '1s'
 `;
+
 
 export default Main;

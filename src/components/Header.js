@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import axi from '../functions/axiosf';
+import Logo from '../assets/logo'
 
 class Header extends React.Component {
   constructor(props) {
@@ -43,7 +44,20 @@ class Header extends React.Component {
           position: "fixed",
           zIndex: 200,
           width: this.props.menuOpenStatus,
-        }}>      
+        }}>  
+      <a
+        className='HeadButton'
+        target="_blank"
+        href={"https://allgood.world/"}
+        >   
+        <Logo
+          style={{
+            width: 100,
+            height: 'auto',
+            margin: 16,
+          }}
+        />
+      </a> 
       <HeadButtonHome
         className='HeadButton'
         onMouseMove={() => { this.setState({ txtColorHome: '#ffcb17' }) }}
