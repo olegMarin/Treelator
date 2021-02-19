@@ -56,6 +56,7 @@ class Header extends React.Component {
             height: 'auto',
             margin: 16,
           }}
+          theme = {"dark"}
         />
       </a> 
       <HeadButtonHome

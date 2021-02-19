@@ -282,6 +282,7 @@ function Main(props) {
             width: 150,
             height: 'auto'
           }}
+          theme={props.theme}
         />
         <ButtonGroup className={classes.margin16} size="large" color="primary" aria-label="large primary button group">
           <Button 
