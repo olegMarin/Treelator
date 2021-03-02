@@ -13,12 +13,24 @@ import EntypoFacebookWithCircle from 'react-entypo-icons/lib/entypo/FacebookWith
 import EntypoTwitterWithCircle  from 'react-entypo-icons/lib/entypo/TwitterWithCircle.js'
 import EntypoPinterestWithCircle  from 'react-entypo-icons/lib/entypo/PinterestWithCircle.js'
 import EntypoLinkedinWithCircle  from 'react-entypo-icons/lib/entypo/LinkedinWithCircle.js'
+import EntypoVkWithCircle  from 'react-entypo-icons/lib/entypo/VkWithCircle.js'
+import EntypoInstagramWithCircle  from 'react-entypo-icons/lib/entypo/InstagramWithCircle.js'
+
+import EntypoPaperPlane  from 'react-entypo-icons/lib/entypo/PaperPlane.js'
+
+import EntypoFacebook from 'react-entypo-icons/lib/entypo/Facebook'
+import EntypoTwitter  from 'react-entypo-icons/lib/entypo/Twitter.js'
+import EntypoPinterest  from 'react-entypo-icons/lib/entypo/Pinterest.js'
+import EntypoLinkedin  from 'react-entypo-icons/lib/entypo/Linkedin.js'
+import EntypoVk  from 'react-entypo-icons/lib/entypo/Vk.js'
+import EntypoInstagram  from 'react-entypo-icons/lib/entypo/Instagram.js'
+
 import Rotate from 'react-reveal/Rotate';
 
 let shareIcon = {
-    height: 40,
-    width: 40,
-    margin: 4,
+    height: 26,
+    width: 26,
+    margin: 8,
     color: '#99CC33'
   }
 
@@ -26,7 +38,7 @@ function BottomShare(props) {
 
  
   const classes = useStyles();
-let text = 'Если переводу свою компанию на удалёнку, смогу сэкономить '+props.sum+' рублей и спасти '+props.trees+' деревьев. Узнай и ты: ссылка'
+let text = 'Если переведу свою компанию на удалёнку, смогу сэкономить '+Math.floor(Number(props.sum))+' рублей и спасти '+Math.floor(Number(props.trees))+' деревьев. Узнай и ты'
     return (
 
       <div
@@ -50,32 +62,74 @@ let text = 'Если переводу свою компанию на удалё�
           <Rotate bottom cascade>
           <div
             className='topStats'>
-              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://treelator.businessmod.ru/">
-              <EntypoFacebookWithCircle
+              <a target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=https://treelator.businessmod.ru/&title="+text}>
+              <EntypoFacebook
                 style={{
                   ...shareIcon
                 }}
               />
               </a>
-              <a target="_blank" href={"https://twitter.com/intent/tweet?url=https://treelator.businessmod.ru/&text="+text}>
-              <EntypoTwitterWithCircle
-                style={{
-                  ...shareIcon
-                }}
-              />
+{/* 
+               <a 
+              target="_blank"
+href={"http://vk.com/share.php?url=https://treelator.businessmod.ru/&title="+text+"&image=https://treelator.businessmod.ru/post.png&noparse=true"}
+              >
+              <EntypoInstagram
+                              style={{
+                                ...shareIcon,
+                                marginTop: 10,
+                              }}
+                            />
               </a>
-              <a target="_blank"
-                href={"https://pinterest.com/pin/create/button/?url=https://treelator.businessmod.ru/&media=https://treelator.businessmod.ru/post.png&description="+text}>
-              <EntypoPinterestWithCircle
-                style={{
-                  ...shareIcon
-                }}
-              />
-              </a>
+               */}
               <a 
               target="_blank"
               href={"https://www.linkedin.com/shareArticle?mini=true&url=https://treelator.businessmod.ru/&title=&summary="+text}>
-              <EntypoLinkedinWithCircle
+              <EntypoLinkedin
+                              style={{
+                                ...shareIcon,
+                                marginBottom: 12,
+                              }}
+                            />
+              </a>
+              <a target="_blank"
+                href={"https://pinterest.com/pin/create/button/?url=https://treelator.businessmod.ru/&media=https://treelator.businessmod.ru/post.png&description='"+text+"'"}
+                >
+              <EntypoPinterest
+                style={{
+                  ...shareIcon
+                }}
+              />
+              </a>              
+
+              <a target="_blank" 
+                href={"https://twitter.com/intent/tweet?url=https://treelator.businessmod.ru/&hashtags=экослед&text="+text}
+                >
+              <EntypoTwitter
+                style={{
+                  ...shareIcon
+                }}
+              />
+              </a>
+
+              
+              <a 
+              target="_blank"
+href={"http://vk.com/share.php?url=https://treelator.businessmod.ru/&title="+text+"&image=https://treelator.businessmod.ru/post.png&noparse=true"}
+              >
+              <EntypoVk
+                              style={{
+                                ...shareIcon
+                              }}
+                            />
+              </a>
+
+             
+              <a 
+              target="_blank"
+href={"http://telegram.me/share/url?url=https://treelator.businessmod.ru/&text="+text+"&image=https://treelator.businessmod.ru/post.png"}
+              >
+              <EntypoPaperPlane
                               style={{
                                 ...shareIcon
                               }}
@@ -94,7 +148,7 @@ let text = 'Если переводу свою компанию на удалё�
 }
 
 export default BottomShare;
-
+//https://telegram.me/share/url?url=https%3A%2F%2Fzen.yandex&text=4%20способа%20поделиться%20ссылкой%20в%20Instagram
 
 const useStyles = makeStyles((theme) => ({
   margin: {
