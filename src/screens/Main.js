@@ -86,6 +86,25 @@ function Main(props) {
     calcBiscuits(isCookies,isCoffee,isFruits)
   };
 
+  const [mileage, setMileage] = useState();
+  const handleSetMileage = (value) => {
+    let vMileage = (value === '' ? '' : Number(value))
+    setMileage(vMileage);
+    //func(vМileage)
+  };
+
+
+  const [fuelConsumption, setFuelConsumption] = useState();
+  const handleSetFuelConsumption = (value) => {
+    let vFuelConsumption = (value === '' ? '' : Number(value))
+    setFuelConsumption(vFuelConsumption);
+    //func(vМileage)
+  };
+
+  const [isOnPublicTransport, setOnPublicTransport] = useState(Number(0));
+  const [isOnCar, setOnCar] = useState(Number(0));
+
+  const [octane, setOctane] = useState(null);
 
   const [isCookies, setCookies] = useState(Number(0));
   const [isCoffee, setCoffee] = useState(Number(0));
@@ -298,6 +317,125 @@ function Main(props) {
         </ButtonGroup>
       </div>
 
+
+      {(isForMe)?
+      <Fade left cascade>
+      <InputForm
+            handleSet={(e)=>handleSetMileage(e)}
+            value={mileage}
+            label={"Какое до офиса расстояние?"}
+            defaultValue={typeof mileage === 'number' ? mileage : ''}
+            helperText=""
+            autoFocus={true}
+            focused={mileage}
+            endAdornment={"километров"}
+            sliderValue = {typeof mileage === 'number' ? mileage : 1}
+            min={1}
+            max={60}
+          />
+        </Fade>:<></>}
+
+{(isForMe&&mileage)?
+        //вид транспорта
+        <Fade left cascade>
+        <div className={classes.root}>
+          <Typography  className={classes.margin16} gutterBottom>На чём добираетесь до работы?</Typography>
+          <ButtonGroup 
+            className={classes.margin16} 
+            orientation="vertical"
+            size="large" color="primary" 
+            aria-label="large primary button group">
+            <Button 
+              className={classes.button}
+              variant={isOnPublicTransport?"contained":"outlined"}
+              onClick={()=>{
+                  setOnPublicTransport(Number(!isOnPublicTransport))
+
+                }}
+              >общественный транспорт</Button>
+            <Button
+              className={classes.button}
+              variant={isOnCar?"contained":"outlined"}
+              onClick={()=>{
+                  setOnCar(Number(!isOnCar))
+                }}
+            >автомобиль</Button>
+          </ButtonGroup>
+
+        {(isForMe&&mileage&&isOnCar)?
+            //вид топлива
+          <Fade bottom left cascade>
+          <div className={classes.root}>
+          <ButtonGroup 
+            className={classes.margin16} 
+            size="large" color="primary" 
+            aria-label="large primary button group">
+            <Button 
+              className={classes.button}
+              variant={(octane==="80")?"contained":"outlined"}
+              onClick={()=>{
+                  setOctane("80")
+                }}
+              >80</Button>
+            <Button 
+              className={classes.button}
+              variant={(octane==="92")?"contained":"outlined"}
+              onClick={()=>{
+                  setOctane("92")
+                }}
+              >92</Button>
+            <Button 
+              className={classes.button}
+              variant={(octane==="95")?"contained":"outlined"}
+              onClick={()=>{
+                  setOctane("95")
+                }}
+              >95</Button>
+            <Button 
+              className={classes.button}
+              variant={(octane==="98")?"contained":"outlined"}
+              onClick={()=>{
+                  setOctane("98")
+                }}
+              >98</Button>
+            <Button 
+              className={classes.button}
+              variant={(octane==="ДТ")?"contained":"outlined"}
+              onClick={()=>{
+                  setOctane("ДТ")
+                }}
+              >ДТ</Button>
+          </ButtonGroup>
+        </div>
+      </Fade>:<></>}
+
+          <Divider 
+            className={classes.margin16}
+            style={{marginTop: 0}}/>
+          </div>
+        </Fade>
+        :<></>} 
+
+
+      {(isForMe&&mileage&&isOnCar&&octane)?
+      <Fade left cascade>
+      <InputForm
+            handleSet={(e)=>handleSetFuelConsumption(e)}
+            value={fuelConsumption}
+            label={"Какой расход топлива у машины?"}
+            defaultValue={typeof fuelConsumption === 'number' ? fuelConsumption : ''}
+            helperText=""
+            autoFocus={true}
+            focused={fuelConsumption}
+            endAdornment={"литров на 100 километров"}
+            sliderValue = {typeof fuelConsumption === 'number' ? fuelConsumption : 1}
+            min={3}
+            max={20}
+          />
+        </Fade>:<></>}
+
+
+
       {isForBusiness?
         <Zoom bottom cascade>
           <InputForm
@@ -333,6 +471,8 @@ function Main(props) {
             max={200}
           />
         </Fade>:<></>}
+
+
         
       {(isForBusiness&&sOffice&&peopleOffice)?
         //кофе печеньки
