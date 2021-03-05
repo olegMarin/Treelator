@@ -14,6 +14,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Divider from '@material-ui/core/Divider';
 
+import moment from 'moment';
+import 'moment/locale/ru';
+
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade'
 import Rotate from 'react-reveal/Rotate';
@@ -95,6 +98,7 @@ function Main(props) {
     let vMileage = (value === '' ? '' : Number(value))
     setMileage(vMileage);
     //func(vМileage)
+    saveResult()
   };
 
 
@@ -103,6 +107,7 @@ function Main(props) {
     let vFuelConsumption = (value === '' ? '' : Number(value))
     setFuelConsumption(vFuelConsumption);
     //func(vМileage)
+    saveResult()
   };
 
   const [isOnPublicTransport, setOnPublicTransport] = useState(Number(0));
@@ -127,7 +132,8 @@ function Main(props) {
     if (peopleOffice > 1000) {
       perBiscuits = perBiscuits * 0.65;
     };
-    setRateBiscuits(perBiscuits)                               
+    setRateBiscuits(perBiscuits)       
+    saveResult()                        
   }
 
   const [isA, setA] = useState(0);
@@ -161,6 +167,8 @@ function Main(props) {
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
     };
+    
+    saveResult()
   }
 
   const [rateElectricity, setRateElectricity] = useState(priceElectricity2);
@@ -208,41 +216,140 @@ function Main(props) {
       setRateWater(priceWater2)
       setPublicTransport(pricePublicTransport2)
     };
+    
+    saveResult()
   }
 
 
   const [priceOffice, setPriceOffice] = useState();
   const handleSetPriceOffice = (value) => {
     setPriceOffice(value === '' ? '' : Number(value));
+    saveResult()
   };
 
   const [kvtCh, setKvtCh] = useState();
   const handleSetKvtCh = (value) => {
     setKvtCh(value === '' ? '' : Number(value));
+    saveResult()
   };
 
   const [paper, setPaper] = useState();
   const handleSetPaper = (value) => {
     setPaper(value === '' ? '' : Number(value));
+    saveResult()
   };
 
   const [water, setWater] = useState();
   const handleSetWater = (value) => {
     setWater(value === '' ? '' : Number(value));
+    saveResult()
   };
 
   const [drink, setDrink] = useState();
   const handleSetDrink = (value) => {
     setDrink(value === '' ? '' : Number(value));
+    saveResult()
   };
+
+  const saveResult = () => {
+  setTimeout(()=>{
+    let newBase = {
+      "isForMe":isForMe,
+      "isForBusiness":isForBusiness,
+      "sOffice":sOffice,
+      "peopleOffice":peopleOffice,
+      "mileage":mileage,
+      "fuelConsumption": fuelConsumption,
+      "isOnPublicTransport": isOnPublicTransport,
+      "publicTransport": publicTransport,
+      "octane":octane,
+      "isCookies":isCookies,
+      "isCoffee":isCoffee,
+      "isFruits":isFruits,
+      "rateBiscuits":rateBiscuits,
+      "isA":isA,
+      "isB":isB,
+      "isC":isC,
+      "rateElectricity":rateElectricity,
+      "rateWater":rateWater,
+      "isMosscow1":isMosscow1,
+      "isMosscow2":isMosscow2,
+      "isPiter1":isPiter1,
+      "isPiter2":isPiter2,
+      "isCity":isCity,
+      "isTown":isTown,
+      "priceOffice":priceOffice,
+      "kvtCh":kvtCh,
+      "paper":paper,
+      "water":water,
+      "drink":drink,
+    }
+  //let keysOfBaseStr = localStorage.getItem('keysOfBase')
+  //let keysOfBase = JSON.parse(keysOfBaseStr)
+    let baseStr = JSON.stringify(newBase)
+    if (props.selected){
+      localStorage.setItem(selected, baseStr);
+    }
+    else
+    {
+      let name = moment().format('lll')
+      setSelected(name)
+      let newKeys = [name,...address]
+      setAddress(newKeys)
+      let keysStr = JSON.stringify(newKeys)
+      localStorage.setItem('keysOfBase', keysStr);
+      localStorage.setItem(selected, baseStr);
+    }
+  }, 1000)
+  }
+  const keysOfBaseStr = localStorage.getItem('keysOfBase')
+  const keysOfBase = JSON.parse(keysOfBaseStr)
+  const [selected, setSelected] = useState(false)
+  const [address, setAddress] = useState(keysOfBase)
+
+  onChangeBase=(f)=>{
+    setSelected(f)
+    let openedStr = localStorage.getItem(f);
+    let opened = JSON.parse(openedStr)
+    setForMe(opened.isForMe)
+    setForBusiness(opened.isForBusiness)
+    setSOffice(opened.sOffice)
+    setPeopleOffice(opened.peopleOffice)
+    setMileage(opened.mileage)
+    setFuelConsumption(opened.fuelConsumption)
+    setOnPublicTransport(opened.isOnPublicTransport)
+    setPublicTransport(opened.publicTransport)
+    setOctane(opened.octane)
+    setCookies(opened.isCookies)
+    setCoffee(opened.isCoffee)
+    setFruits(opened.isFruits)
+    setRateBiscuits(opened.rateBiscuits)
+    setA(opened.isA)
+    setB(opened.isB)
+    setC(opened.isC)
+    setRateElectricity(opened.rateElectricity)
+    setRateWater(opened.rateWater)
+    setMosscow1(opened.isMosscow1)
+    setMosscow2(opened.isMosscow2)
+    setPiter1(opened.isPiter1)
+    setPiter1(opened.isPiter1)
+    setCity(opened.isCity)
+    setTown(opened.isTown)
+    setPriceOffice(opened.priceOffice)
+    setKvtCh(opened.kvtCh)
+    setPaper(opened.paper)
+    setWater(opened.water)
+    setDrink(opened.drink)
+  }
+
 
   const classes = useStyles();
   return (
     <>
       <Top
-        address={props.address}
-        onChange={(f)=>{props.onChange(f)}}
-        selected={props.selected}
+        address={address}
+        onChange={(f)=>{onChangeBase(f)}}
+        selected={selected}
         toggleTheme={()=>props.toggleTheme()}
       />
       <TopAnswer

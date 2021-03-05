@@ -61,10 +61,8 @@ class App extends React.Component {
       token: '',
       menuOpenStatus: 0,
       menuOpenStatusToggle: this.menuOpenStatusToggle(),
-      base: [],
-      address: [],
       sourceToPrint: [], 
-      selected: {},
+      selected: '',
       theme: 'light'
     }
 
