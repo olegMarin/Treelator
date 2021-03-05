@@ -65,9 +65,9 @@ function TopAnswer(props) {
             <EmojiPeopleIcon className={classes.color}/>
             <DoubleArrowIcon className={classes.color }/>
             <EntypoTree style={{ color: 'green' }}/>
-            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>{ '  деревьев'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>{ (props.treesPersonal?Math.floor(props.treesPersonal):'') + '  деревьев'}</Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{ ' тыс.  руб.'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{ (props.sumPersonal?Math.floor(props.sumPersonal/1000):'')+' тыс.  руб.'}</Typography>
           </div>
           </Fade>
           :

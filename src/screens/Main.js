@@ -43,6 +43,10 @@ const priceWater1 = 42.3
 const priceWater2 = 32.53
 const priceWater3 = 30.45
 
+const pricePublicTransport1 = 26940
+const pricePublicTransport2 = 28800
+const pricePublicTransport3 = 16200
+
 
 function Main(props) {
 
@@ -102,6 +106,7 @@ function Main(props) {
   };
 
   const [isOnPublicTransport, setOnPublicTransport] = useState(Number(0));
+  const [publicTransport, setPublicTransport] = useState(Number(0));
   const [isOnCar, setOnCar] = useState(Number(0));
 
   const [octane, setOctane] = useState(null);
@@ -177,26 +182,31 @@ function Main(props) {
       setPriceOffice(Math.floor(squareClass*priceMosscow2/12));
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
+      setPublicTransport(pricePublicTransport1)
     };
     if (Region == 2) {
       setPriceOffice(Math.floor(squareClass*priceCity/12));
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
+      setPublicTransport(pricePublicTransport2)
     };
     if (Region == 3) {
       setPriceOffice(Math.floor(squareClass*priceTown/12));
       setRateElectricity(priceElectricity3)
       setRateWater(priceWater3)
+      setPublicTransport(pricePublicTransport3)
     };
     if (Region == 4) {
       setPriceOffice(Math.floor(squareClass*priceMosscow1/12));//центр москвы
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
+      setPublicTransport(pricePublicTransport1)
     };
     if (Region == 5) {
       setPriceOffice(Math.floor(squareClass*pricePiter1/12));//центр питера
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
+      setPublicTransport(pricePublicTransport2)
     };
   }
 
@@ -249,6 +259,19 @@ function Main(props) {
           (water*rateWater*12)+
           (drink*9.3*12)+  
           (paper*165.2*12)
+          }
+        sumPersonal={
+          (
+            (isOnPublicTransport&&publicTransport)+
+            (isOnCar&&(mileage*fuelConsumption/100*(+octane)* 2 * 21 * 12))
+          )*(isForBusiness?peopleOffice:1)
+
+        }
+        treesPersonal={
+          (
+            (isOnPublicTransport&&(mileage* 1.084 / 130000 * 121.8 * 21 * 12 * 2 * 1.25 / 20))+
+            (isOnCar&&(mileage* 1.085 / 130000 * 12.18 *fuelConsumption * 2 * 21 * 12))
+          )*(isForBusiness?peopleOffice:1)
           }
           isForMe={isForMe}
           isForBusiness={isForBusiness}
@@ -372,37 +395,37 @@ function Main(props) {
             aria-label="large primary button group">
             <Button 
               className={classes.button}
-              variant={(octane==="80")?"contained":"outlined"}
+              variant={(octane==="40")?"contained":"outlined"}
               onClick={()=>{
-                  setOctane("80")
+                  setOctane("40")
                 }}
               >80</Button>
             <Button 
               className={classes.button}
-              variant={(octane==="92")?"contained":"outlined"}
+              variant={(octane==="43")?"contained":"outlined"}
               onClick={()=>{
-                  setOctane("92")
+                  setOctane("43")
                 }}
               >92</Button>
             <Button 
               className={classes.button}
-              variant={(octane==="95")?"contained":"outlined"}
+              variant={(octane==="47")?"contained":"outlined"}
               onClick={()=>{
-                  setOctane("95")
+                  setOctane("47")
                 }}
               >95</Button>
             <Button 
               className={classes.button}
-              variant={(octane==="98")?"contained":"outlined"}
+              variant={(octane==="56")?"contained":"outlined"}
               onClick={()=>{
-                  setOctane("98")
+                  setOctane("56")
                 }}
               >98</Button>
             <Button 
               className={classes.button}
-              variant={(octane==="ДТ")?"contained":"outlined"}
+              variant={(octane==="48")?"contained":"outlined"}
               onClick={()=>{
-                  setOctane("ДТ")
+                  setOctane("48")
                 }}
               >ДТ</Button>
           </ButtonGroup>
@@ -559,7 +582,7 @@ function Main(props) {
         </div>
       </Rotate>:<></>}
         {(isForBusiness&&sOffice&&peopleOffice&&
-        (isA||isB||isC))?
+        (isA||isB||isC))||(isForMe&&isOnPublicTransport)?
         //какой город
       <Flip bottom cascade>
       <div className={classes.root}>
