@@ -251,7 +251,7 @@ function Main(props) {
     saveResult()
   };
 
-  const saveResult = () => {
+  const saveResult = (didMount) => {
   setTimeout(()=>{
     let newBase = {
       "isForMe":isForMe,
@@ -286,28 +286,34 @@ function Main(props) {
     }
   //let keysOfBaseStr = localStorage.getItem('keysOfBase')
   //let keysOfBase = JSON.parse(keysOfBaseStr)
+  
     let baseStr = JSON.stringify(newBase)
-    if (props.selected){
+    if (selected){
       localStorage.setItem(selected, baseStr);
     }
     else
     {
-      let name = moment().format('lll')
-      setSelected(name)
-      let newKeys = [name,...address]
-      setAddress(newKeys)
-      let keysStr = JSON.stringify(newKeys)
-      localStorage.setItem('keysOfBase', keysStr);
-      localStorage.setItem(selected, baseStr);
+      if (didMount){
+        localStorage.setItem('false', baseStr);
+      }
+      else{
+        let name = moment().format('lll')
+        setSelected(name)
+        let newKeys = [name,...address]
+        setAddress(newKeys)
+        let keysStr = JSON.stringify(newKeys)
+        localStorage.setItem('keysOfBase', keysStr);
+        localStorage.setItem(name, baseStr);
+      }
     }
   }, 1000)
   }
   const keysOfBaseStr = localStorage.getItem('keysOfBase')
   const keysOfBase = JSON.parse(keysOfBaseStr)
   const [selected, setSelected] = useState(false)
-  const [address, setAddress] = useState(keysOfBase)
+  const [address, setAddress] = useState(keysOfBase?keysOfBase:[])
 
-  onChangeBase=(f)=>{
+  const onChangeBase=(f)=>{
     setSelected(f)
     let openedStr = localStorage.getItem(f);
     let opened = JSON.parse(openedStr)
@@ -342,6 +348,7 @@ function Main(props) {
     setDrink(opened.drink)
   }
 
+  saveResult(true)
 
   const classes = useStyles();
   return (

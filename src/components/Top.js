@@ -42,9 +42,10 @@ function Top(props) {
           onChange={(e)=>{props.onChange(e.target.value)}}
           input={<BootstrapInput value={props.selected} />}
         >
-          {props.address.map((item, index)=>{
+          <MenuItem key={0} value={false} >{'Новый расчёт'}</MenuItem>
+          {props.address&&props.address.map((item, index)=>{
             return(
-              <MenuItem key={index} value={item} >{item}</MenuItem>
+              <MenuItem key={index+1} value={item} >{item}</MenuItem>
             )
           })}
         </Select>
