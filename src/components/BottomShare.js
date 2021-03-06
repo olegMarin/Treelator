@@ -38,7 +38,7 @@ function BottomShare(props) {
 
  
   const classes = useStyles();
-let text = 'Если переведу свою компанию на удалёнку, смогу сэкономить '+Math.floor(Number(props.sum))+' рублей и спасти '+Math.floor(Number(props.trees))+' деревьев. Узнай и ты'
+let text = props.pretext+' за год сэкономилю '+Math.floor(Number(props.sum))+' рублей и спасу '+Math.floor(Number(props.trees))+' деревьев. Узнай и ты'
     return (
 
       <div
@@ -58,7 +58,7 @@ let text = 'Если переведу свою компанию на удалё�
           height:props.isForBusiness?40:0,
           overflow: 'hidden'
           }}>
-        {props.isForBusiness?
+        {props.height?
           <Rotate bottom cascade>
           <div
             className='topStats'>

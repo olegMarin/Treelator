@@ -350,6 +350,44 @@ function Main(props) {
 
   saveResult(true)
 
+  const calcSumCorporate = () => {
+    return(
+          (sOffice*(priceOffice?priceOffice:0)*12)+
+          (rateBiscuits)+
+          (kvtCh*rateElectricity*12)+
+          (water*rateWater*12)+
+          (drink*9.3*12)+  
+          (paper*165.2*12)
+    )
+  }
+
+  const calcSumPersonal = () => {
+    return(
+          (
+            (isOnPublicTransport&&publicTransport)+
+            (isOnCar&&(mileage*fuelConsumption/100*(+octane)* 2 * 21 * 12))
+          )*(isForBusiness?peopleOffice:1)
+        )
+  }
+
+  const calcTreesCorporate = () => {
+    return(
+          (kvtCh * 0.004 * 0.45* 12)+
+          (water * 0.003 * 0.33 * 12)+
+          ((drink * 0.003 * 0.33 * 12) + (drink / 19 * 0.02 * 12))+  
+          (paper * 0.025 * 12)
+          )
+  }
+
+  const calcTreesPersonal = () => {
+    return(
+          (
+            (isOnPublicTransport&&(mileage* 1.084 / 130000 * 121.8 * 21 * 12 * 2 * 1.25 / 20))+
+            (isOnCar&&(mileage* 1.085 / 130000 * 12.18 *fuelConsumption * 2 * 21 * 12))
+          )*(isForBusiness?peopleOffice:1)
+          )
+  }
+
   const classes = useStyles();
   return (
     <>
@@ -360,58 +398,26 @@ function Main(props) {
         toggleTheme={()=>props.toggleTheme()}
       />
       <TopAnswer
-        trees={
-          (kvtCh * 0.004 * 0.45* 12)+
-          (water * 0.003 * 0.33 * 12)+
-          ((drink * 0.003 * 0.33 * 12) + (drink / 19 * 0.02 * 12))+  
-          (paper * 0.025 * 12)
-          }
-        sum={
-          (sOffice*(priceOffice?priceOffice:0)*12)+
-          (rateBiscuits)+
-          (kvtCh*rateElectricity*12)+
-          (water*rateWater*12)+
-          (drink*9.3*12)+  
-          (paper*165.2*12)
-          }
-        sumPersonal={
-          (
-            (isOnPublicTransport&&publicTransport)+
-            (isOnCar&&(mileage*fuelConsumption/100*(+octane)* 2 * 21 * 12))
-          )*(isForBusiness?peopleOffice:1)
-
-        }
-        treesPersonal={
-          (
-            (isOnPublicTransport&&(mileage* 1.084 / 130000 * 121.8 * 21 * 12 * 2 * 1.25 / 20))+
-            (isOnCar&&(mileage* 1.085 / 130000 * 12.18 *fuelConsumption * 2 * 21 * 12))
-          )*(isForBusiness?peopleOffice:1)
-          }
+        trees={calcTreesCorporate()}
+        sum={calcSumCorporate()}
+        sumPersonal={calcSumPersonal()}
+        treesPersonal={calcTreesPersonal()}
           isForMe={isForMe}
           isForBusiness={isForBusiness}
       />
 
       <BottomShare
-        height={(isForBusiness&&sOffice&&peopleOffice&&
+        height={isForBusiness?
+          ((sOffice&&peopleOffice&&
           (isA||isB||isC)&&
           (isMosscow1||isMosscow2||isPiter1||isPiter2||isCity||isTown))
-          ?80:0}
-        trees={
-          (kvtCh * 0.004 * 0.45* 12)+
-          (water * 0.003 * 0.33 * 12)+
-          ((drink * 0.003 * 0.33 * 12) + (drink / 19 * 0.02 * 12))+  
-          (paper * 0.025 * 12)
-          }
-        sum={
-          (sOffice*(priceOffice?priceOffice:0)*12)+
-          (rateBiscuits)+
-          (kvtCh*rateElectricity*12)+
-          (water*rateWater*12)+
-          (drink*9.3*12)+  
-          (paper*165.2*12)
-          }
-          isForMe={isForMe}
-          isForBusiness={isForBusiness}
+          ?80:0)
+          :
+          (((mileage&&isOnPublicTransport&&publicTransport)||(isOnCar&&mileage&&fuelConsumption&&octane))?80:0)}
+        trees={isForBusiness?calcTreesCorporate():calcTreesPersonal()}
+        sum={isForBusiness?calcSumCorporate():calcSumPersonal()}
+        pretext={isForBusiness?'Если переведу компанию на удалёнку,':'Если буду работать из дома, '}
+
       />
 
 
