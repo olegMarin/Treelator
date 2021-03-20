@@ -10,12 +10,18 @@ import Fade from 'react-reveal/Fade'
 import {lay} from '../constants/Layout'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import EntypoTree from 'react-entypo-icons/lib/entypo/Tree'
+import declOfNum from '../functions/declOfNum'
+import NumberFormat from 'react-number-format';
 
 function TopAnswer(props) {
 
  
   const classes = useStyles();
+  let floorTrees = props.trees?Math.floor(props.trees):''
+  let declOfTrees = props.trees?declOfNum(floorTrees, ['дерево', 'дерева', 'деревьев']):''
 
+  let floorTreesPersonal = props.treesPersonal?Math.floor(props.treesPersonal):''
+  let declOfTreesPersonal = props.treesPersonal?declOfNum(floorTreesPersonal, ['дерево', 'дерева', 'деревьев']):''
     return (
 
       <div
@@ -45,10 +51,12 @@ function TopAnswer(props) {
             <DoubleArrowIcon className={classes.color}/>
             <EntypoTree style={{ color: 'green' }}/>
             <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>
-              {(props.trees?Math.floor(props.trees):'') + '  деревьев'}
+              { floorTrees + ' ' + declOfTrees }
               </Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{(props.sum?Math.floor(props.sum/1000):'') + ' тыс.  руб.'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>
+              {new Intl.NumberFormat('ru-RU').format(props.sum?Math.floor(props.sum/1000):'')+' тыс.  руб.'}
+            </Typography>
           </div>
           </Fade>
           :
@@ -65,9 +73,13 @@ function TopAnswer(props) {
             <EmojiPeopleIcon className={classes.color}/>
             <DoubleArrowIcon className={classes.color }/>
             <EntypoTree style={{ color: 'green' }}/>
-            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>{ (props.treesPersonal?Math.floor(props.treesPersonal):'') + '  деревьев'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4, marginRight: 16 }} gutterBottom>
+              { floorTreesPersonal + ' ' + declOfTreesPersonal }
+            </Typography>
             <AccountBalanceWalletIcon style={{ color: 'green' }}/>
-            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>{ (props.sumPersonal?Math.floor(props.sumPersonal/1000):'')+' тыс.  руб.'}</Typography>
+            <Typography className={classes.color} style={{ margin: 4 }} gutterBottom>
+              { new Intl.NumberFormat('ru-RU').format(props.sumPersonal?Math.floor(props.sumPersonal/1000):'')+' тыс.  руб.'}
+            </Typography>
           </div>
           </Fade>
           :

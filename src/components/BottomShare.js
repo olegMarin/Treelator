@@ -26,6 +26,7 @@ import EntypoVk  from 'react-entypo-icons/lib/entypo/Vk.js'
 import EntypoInstagram  from 'react-entypo-icons/lib/entypo/Instagram.js'
 
 import Rotate from 'react-reveal/Rotate';
+import declOfNum from '../functions/declOfNum'
 
 let shareIcon = {
     height: 26,
@@ -38,7 +39,13 @@ function BottomShare(props) {
 
  
   const classes = useStyles();
-let text = props.pretext+' за год сэкономилю '+Math.floor(Number(props.sum))+' рублей и спасу '+Math.floor(Number(props.trees))+' деревьев. Узнай и ты'
+  let floorTrees = props.trees?Math.floor(props.trees):''
+  let declOfTrees = props.trees?declOfNum(floorTrees, ['дерево', 'дерева', 'деревьев']):''
+
+  let floorSum = props.sum?Math.floor(props.sum):''
+  let declOfSum = props.sum?declOfNum(floorSum, ['рубль', 'рубля', 'рублей']):''
+
+  let text = props.pretext+' за год сэкономилю '+new Intl.NumberFormat('ru-RU').format(floorSum)+' '+ declOfSum +' и спасу '+new Intl.NumberFormat('ru-RU').format(floorTrees)+' '+declOfTrees+'. Узнай и ты'
     return (
 
       <div

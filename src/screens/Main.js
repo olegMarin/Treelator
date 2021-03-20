@@ -88,7 +88,7 @@ function Main(props) {
     setWater(mathWorker*0.51)
     setDrink(Math.floor(mathWorker*1.25*21))
     //расход пачек бумаги
-    setPaper(Math.floor(mathWorker*6.1))
+    setPaper(Math.floor(mathWorker*2))
     //пересчитываем вкусняшки
     calcBiscuits(isCookies,isCoffee,isFruits)
   };
