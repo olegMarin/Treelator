@@ -50,6 +50,8 @@ const pricePublicTransport1 = 26940
 const pricePublicTransport2 = 28800
 const pricePublicTransport3 = 16200
 
+const meetingRoomCoef = 0.7
+const employeeCommunicationCosts = 1000
 
 function Main(props) {
 
@@ -143,27 +145,27 @@ function Main(props) {
   const calcClass=(sClass) => {
      //let squareClass = isA*2+isB+isC*0.7
     if (isMosscow2) {
-      setPriceOffice(Math.floor(sClass*priceMosscow2/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*sClass*priceMosscow2/12));
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
     };
     if (isPiter2||isCity) {
-      setPriceOffice(Math.floor(sClass*priceCity/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*sClass*priceCity/12));
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
     };
     if (isTown) {
-      setPriceOffice(Math.floor(sClass*priceTown/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*sClass*priceTown/12));
       setRateElectricity(priceElectricity3)
       setRateWater(priceWater3)
     };
     if (isMosscow1) {
-      setPriceOffice(Math.floor(sClass*priceMosscow1/12));//центр москвы
+      setPriceOffice(Math.floor(meetingRoomCoef*sClass*priceMosscow1/12));//центр москвы
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
     };
     if (isPiter1) {
-      setPriceOffice(Math.floor(sClass*pricePiter1/12));//центр питера
+      setPriceOffice(Math.floor(meetingRoomCoef*sClass*pricePiter1/12));//центр питера
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
     };
@@ -187,31 +189,31 @@ function Main(props) {
      // Либо 1 (дорогой регион), либо 2 (средний регион), либо 3 (дешёвый)
      let squareClass = isA*coefA+isB+isC*coefC
     if (Region == 1) {
-      setPriceOffice(Math.floor(squareClass*priceMosscow2/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*squareClass*priceMosscow2/12));
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
       setPublicTransport(pricePublicTransport1)
     };
     if (Region == 2) {
-      setPriceOffice(Math.floor(squareClass*priceCity/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*squareClass*priceCity/12));
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
       setPublicTransport(pricePublicTransport2)
     };
     if (Region == 3) {
-      setPriceOffice(Math.floor(squareClass*priceTown/12));
+      setPriceOffice(Math.floor(meetingRoomCoef*squareClass*priceTown/12));
       setRateElectricity(priceElectricity3)
       setRateWater(priceWater3)
       setPublicTransport(pricePublicTransport3)
     };
     if (Region == 4) {
-      setPriceOffice(Math.floor(squareClass*priceMosscow1/12));//центр москвы
+      setPriceOffice(Math.floor(meetingRoomCoef*squareClass*priceMosscow1/12));//центр москвы
       setRateElectricity(priceElectricity1)
       setRateWater(priceWater1)
       setPublicTransport(pricePublicTransport1)
     };
     if (Region == 5) {
-      setPriceOffice(Math.floor(squareClass*pricePiter1/12));//центр питера
+      setPriceOffice(Math.floor(meetingRoomCoef*squareClass*pricePiter1/12));//центр питера
       setRateElectricity(priceElectricity2)
       setRateWater(priceWater2)
       setPublicTransport(pricePublicTransport2)
@@ -357,7 +359,9 @@ function Main(props) {
           (kvtCh*rateElectricity*12)+
           (water*rateWater*12)+
           (drink*9.3*12)+  
-          (paper*165.2*12)
+          (paper*165.2*12)-
+          (peopleOffice*employeeCommunicationCosts*12)-
+          (peopleOffice*10000)//это расходы на обустройство домашнего офиса сотруднику
     )
   }
 
@@ -365,7 +369,8 @@ function Main(props) {
     return(
           (
             (isOnPublicTransport&&publicTransport)+
-            (isOnCar&&(mileage*fuelConsumption/100*(+octane)* 2 * 21 * 12))
+            (isOnCar&&(mileage*fuelConsumption/100*(+octane)* 2 * 21 * 12))+
+            (employeeCommunicationCosts*12)
           )*(isForBusiness?peopleOffice:1)
         )
   }
